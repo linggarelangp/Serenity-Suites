@@ -246,6 +246,6 @@
 
         window.localStorage.setItem('roomData', JSON.stringify(data))
 
-        window.location.href = '<?= BASE_URL; ?>/reservation#reservation'
+        window.location.href = '<?= BASE_URL; ?>/rooms/reservations#reservation'
     }
 </script>

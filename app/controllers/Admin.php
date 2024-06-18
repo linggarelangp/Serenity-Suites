@@ -3,14 +3,22 @@
 class Admin extends Controller
 {
     private string $hotel_facilities_repo = 'hotel_facilities_repo';
+    private string $auth_repo = 'Auth_repo';
 
     public function index(): void
     {
-        $data = array(
-            'title' => 'Admin',
-        );
+        session_start();
 
-        $this->view_admin('admin/index', $data);
+        if ($_SESSION['roleid'] === 1 && $_SESSION['status'] === true) {
+            $data = array(
+                'title' => 'Admin'
+            );
+
+            $this->view_admin('admin/index', $data);
+        } else {
+            header("Location: " . BASE_URL . "/home");
+            exit;
+        }
     }
 
     public function customers(): void
@@ -57,6 +65,10 @@ class Admin extends Controller
     }
 
     // CRUD
+
+    public function login()
+    {
+    }
 
     public function add_hotel_facilites()
     {
