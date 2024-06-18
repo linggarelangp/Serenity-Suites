@@ -107,15 +107,36 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/user">
+                        <a data-toggle="collapse" href="#user" class="collapsed" aria-expanded="false">
                             <i class="fas fa-user"></i>
                             <p>User</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="user">
+                            <ul class="nav nav-collapse pb-0 mb-0">
+                                <li>
+                                    <a href=" <?= BASE_URL; ?>/admin/customers"">
+                                        <span class=" sub-item">Customers</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href=" <?= BASE_URL; ?>/admin/worker"">
+                                        <span class=" sub-item">Worker</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL; ?>/admin/room">
+                            <i class="fas fa-door-open"></i>
+                            <p>Room</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/kamar">
+                        <a href="<?= BASE_URL; ?>/admin/Facilities">
                             <i class="fas fa-door-open"></i>
-                            <p>Kamar</p>
+                            <p>Room Facilities</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -217,7 +238,6 @@
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th>Full Name</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -226,7 +246,6 @@
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th>Full Name</th>
-                                                <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -235,30 +254,18 @@
                                                 <td>Shad</td>
                                                 <td>Decker</td>
                                                 <td>Shad Decker</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger">Hapus</button>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>bruce@gmail.com</td>
                                                 <td>Michael</td>
                                                 <td>Bruce</td>
                                                 <td>Michael Bruce</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger">Hapus</button>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>donna@gmail.com</td>
                                                 <td>Donna</td>
                                                 <td>Snider</td>
                                                 <td>Donna Snider</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger">Hapus</button>
-                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

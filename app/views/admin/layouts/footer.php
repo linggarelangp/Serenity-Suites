@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+   
    <!--   Core JS Files   -->
    <script src="<?= BASE_URL; ?>/assets/js/core/jquery.3.2.1.min.js"></script>
    <script src="<?= BASE_URL; ?>/assets/js/core/popper.min.js"></script>

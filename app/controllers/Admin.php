@@ -13,28 +13,44 @@ class Admin extends Controller
         $this->view_admin('admin/index', $data);
     }
 
-    public function user(): void
+    public function customers(): void
     {
         $data = array(
-            'title' => 'Admin',
+            'title' => 'Customers',
         );
 
-        $this->view_admin('admin/user', $data);
+        $this->view_admin('admin/customers', $data);
+    }
+    public function worker(): void
+    {
+        $data = array(
+            'title' => 'Worker',
+        );
+
+        $this->view_admin('admin/worker', $data);
     }
 
-    public function kamar(): void
+    public function room(): void
     {
         $data = array(
-            'title' => 'Admin',
+            'title' => 'Rooms',
         );
 
-        $this->view_admin('admin/kamar', $data);
+        $this->view_admin('admin/room', $data);
+    }
+    public function facilities(): void
+    {
+        $data = array(
+            'title' => 'Facilities',
+        );
+
+        $this->view_admin('admin/facilities', $data);
     }
 
     public function reservasi(): void
     {
         $data = array(
-            'title' => 'Admin',
+            'title' => 'Reservation',
         );
 
         $this->view_admin('admin/reservasi', $data);

@@ -127,7 +127,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="<?= BASE_URL; ?>/admin/room">
                             <i class="fas fa-door-open"></i>
                             <p>Room</p>
@@ -139,7 +139,7 @@
                             <p>Room Facilities</p>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/admin/reservasi">
                             <i class="fas fa-database"></i>
                             <p>Reservasi</p>
@@ -170,7 +170,7 @@
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Reservasi</a>
+                            <a href="#">Room</a>
                         </li>
                     </ul>
                 </div>
@@ -178,61 +178,76 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Table Reservasi</h4>
+                            <div class="card-header d-flex justify-content-between">
+                                <h4 class="card-title">Table Room</h4>
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">Add Room</button>
                             </div>
+
+                            <!-- Add Room Modal -->
+                            <div class="modal fade" id="addRoomModal" tabindex="-1" aria-labelledby="addRoomModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="addRoomModal">Add Room</h1>
+                                            <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="RoomName">Name Room</label>
+                                                    <input type="text" class="form-control" id="RoomName" name="RoomName" placeholder="Enter name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="totalRoom">Total Room</label>
+                                                    <input type="number" class="form-control" id="totalRoom" name="totalRoom" placeholder="Enter total">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>User Name</th>
-                                                <th>Email</th>
-                                                <th>Room Name</th>
-                                                <th>Check In</th>
-                                                <th>Check Out</th>
+                                                <th>Name Room</th>
+                                                <th>Total Room</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>User Name</th>
-                                                <th>Email</th>
-                                                <th>Room Name</th>
-                                                <th>Check In</th>
-                                                <th>Check Out</th>
+                                                <th>Name Room</th>
+                                                <th>Total Room</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <tr>
-                                                <th>Shad Decker</th>
-                                                <th>shad@gmail.com</th>
-                                                <th>Superior Room</th>
-                                                <th>20/05/2024</th>
-                                                <th>27/05/2024</th>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Michael Bruce</td>
-                                                <td>bruce@gmail.com</td>
-                                                <td>Deluxe Room</td>
-                                                <th>20/05/2024</th>
-                                                <th>27/05/2024</th>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Donna Snider</td>
-                                                <td>donna@gmail.com</td>
                                                 <td>Standard Room</td>
-                                                <th>20/05/2024</th>
-                                                <th>27/05/2024</th>
+                                                <td>2</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Superior Room</td>
+                                                <td>6</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Deluxe Room</td>
+                                                <td>5</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
                                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
@@ -252,29 +267,17 @@
                                                 <div class="modal-body">
                                                     <form>
                                                         <div class="form-group">
-                                                            <label for="userName">User Name</label>
-                                                            <input type="text" class="form-control" id="userName" placeholder="Enter name">
+                                                            <label for="RoomName">Name Room</label>
+                                                            <input type="text" class="form-control" id="RoomName" placeholder="Enter name">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="email">Email</label>
-                                                            <input type="email" class="form-control" id="email" placeholder="Enter email">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="roomName">Room Name</label>
-                                                            <input type="text" class="form-control" id="roomName" placeholder="Enter room name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="checkIn">Check In</label>
-                                                            <input type="date" class="form-control" id="checkIn" placeholder="Enter check in">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="checkOut">Check Out</label>
-                                                            <input type="date" class="form-control" id="checkOut" placeholder="Enter check out">
+                                                            <label for="totalRoom">Total Room</label>
+                                                            <input type="number" class="form-control" id="totalRoom" placeholder="Enter total">
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
@@ -292,6 +295,7 @@
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to delete this Room?</p>
                                                     <button type="button" class="btn btn-danger">Delete</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>

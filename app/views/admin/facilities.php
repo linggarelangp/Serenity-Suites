@@ -133,13 +133,13 @@
                             <p>Room</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="<?= BASE_URL; ?>/admin/Facilities">
                             <i class="fas fa-door-open"></i>
                             <p>Room Facilities</p>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/admin/reservasi">
                             <i class="fas fa-database"></i>
                             <p>Reservasi</p>
@@ -170,7 +170,7 @@
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Reservasi</a>
+                            <a href="#">Room Facilities</a>
                         </li>
                     </ul>
                 </div>
@@ -178,61 +178,85 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Table Reservasi</h4>
+                            <div class="card-header d-flex justify-content-between">
+                                <h4 class="card-title">Table Facilities</h4>
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addfacilitiesModal">Add Facilities</button>
                             </div>
+
+                            <!-- Add Facilities Modal -->
+                            <div class="modal fade" id="addfacilitiesModal" tabindex="-1" aria-labelledby="addfacilitiesModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="addfacilitiesModal">Add Facilities</h1>
+                                            <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="facilitiesName">Name Facilities</label>
+                                                    <input type="text" class="form-control" id="facilitiesName" placeholder="Enter name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="CreateAt">Create At</label>
+                                                    <input type="date" class="form-control" id="CreateAt" placeholder="Enter Create At">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="UpdateAt">Update At</label>
+                                                    <input type="date" class="form-control" id="UpdateAt" placeholder="Enter Update At">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>User Name</th>
-                                                <th>Email</th>
-                                                <th>Room Name</th>
-                                                <th>Check In</th>
-                                                <th>Check Out</th>
+                                                <th>Name</th>
+                                                <th>Create At</th>
+                                                <th>Update At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>User Name</th>
-                                                <th>Email</th>
-                                                <th>Room Name</th>
-                                                <th>Check In</th>
-                                                <th>Check Out</th>
+                                                <th>Name Facilities</th>
+                                                <th>Create At</th>
+                                                <th>Update At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <tr>
-                                                <th>Shad Decker</th>
-                                                <th>shad@gmail.com</th>
-                                                <th>Superior Room</th>
-                                                <th>20/05/2024</th>
-                                                <th>27/05/2024</th>
+                                                <td>Standard Facilities</td>
+                                                <td>2</td>
+                                                <td>2</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
                                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Michael Bruce</td>
-                                                <td>bruce@gmail.com</td>
-                                                <td>Deluxe Room</td>
-                                                <th>20/05/2024</th>
-                                                <th>27/05/2024</th>
+                                                <td>Superior Facilities</td>
+                                                <td>6</td>
+                                                <td>6</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
                                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Donna Snider</td>
-                                                <td>donna@gmail.com</td>
-                                                <td>Standard Room</td>
-                                                <th>20/05/2024</th>
-                                                <th>27/05/2024</th>
+                                                <td>Deluxe Facilities</td>
+                                                <td>5</td>
+                                                <td>5</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
                                                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
@@ -246,35 +270,27 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="editModal">Edit Room</h1>
+                                                    <h1 class="modal-title fs-5" id="editModal">Edit Facilities</h1>
                                                     <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form>
                                                         <div class="form-group">
-                                                            <label for="userName">User Name</label>
-                                                            <input type="text" class="form-control" id="userName" placeholder="Enter name">
+                                                            <label for="facilitiesName">Name Facilities</label>
+                                                            <input type="text" class="form-control" id="facilitiesName" placeholder="Enter name">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="email">Email</label>
-                                                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                                            <label for="CreateAt">Create At</label>
+                                                            <input type="date" class="form-control" id="CreateAt" placeholder="Enter Create At">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="roomName">Room Name</label>
-                                                            <input type="text" class="form-control" id="roomName" placeholder="Enter room name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="checkIn">Check In</label>
-                                                            <input type="date" class="form-control" id="checkIn" placeholder="Enter check in">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="checkOut">Check Out</label>
-                                                            <input type="date" class="form-control" id="checkOut" placeholder="Enter check out">
+                                                            <label for="UpdateAt">Update At</label>
+                                                            <input type="date" class="form-control" id="UpdateAt" placeholder="Enter Update At">
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
@@ -286,12 +302,13 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="deleteModal">Delete Room</h1>
+                                                    <h1 class="modal-title fs-5" id="deleteModal">Delete Facilities</h1>
                                                     <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Are you sure you want to delete this Room?</p>
+                                                    <p>Are you sure you want to delete this Facilities?</p>
                                                     <button type="button" class="btn btn-danger">Delete</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>

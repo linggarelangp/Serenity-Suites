@@ -106,16 +106,37 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/user">
+                    <li class="nav-item active submenu">
+                        <a data-toggle="collapse" href="#user" class="collapsed" aria-expanded="true">
                             <i class="fas fa-user"></i>
                             <p>User</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse show" id="user">
+                            <ul class="nav nav-collapse pb-0 mb-0">
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/admin/customers"">
+                                        <span class=" sub-item">Customers</span>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="<?= BASE_URL; ?>/admin/worker">
+                                        <span class="sub-item">Worker</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL; ?>/admin/room">
+                            <i class="fas fa-door-open"></i>
+                            <p>Room</p>
                         </a>
                     </li>
-                    <li class="nav-item active">
-                        <a href="<?= BASE_URL; ?>/admin/kamar">
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL; ?>/admin/Facilities">
                             <i class="fas fa-door-open"></i>
-                            <p>Kamar</p>
+                            <p>Room Facilities</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -149,7 +170,7 @@
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Kamar</a>
+                            <a href="#">Worker</a>
                         </li>
                     </ul>
                 </div>
@@ -158,50 +179,46 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title">Table Kamar</h4>
-                                <button type="button" class="btn btn-sm btn-primary">Add Kamar</button>
+                                <h4 class="card-title">Table User</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Name Kamar</th>
-                                                <th>Total Kamar</th>
-                                                <th>Action</th>
+                                                <th>Email</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Full Name</th>
+
                                             </tr>
                                         </thead>
                                         <tfoot>
-                                                <tr>
-                                                <th>Name Kamar</th>
-                                                <th>Total Kamar</th>
-                                                <th>Action</th>
+                                            <tr>
+                                                <th>Email</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Full Name</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <tr>
-                                                <td>Standard Room</td>
-                                                <td>2</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger">Hapus</button>
-                                                </td>
+                                                <td>shad@gmail.com</td>
+                                                <td>Shad</td>
+                                                <td>Decker</td>
+                                                <td>Shad Decker</td>
                                             </tr>
                                             <tr>
-                                                <td>Superior Room</td>
-                                                <td>6</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger">Hapus</button>
-                                                </td>
+                                                <td>bruce@gmail.com</td>
+                                                <td>Michael</td>
+                                                <td>Bruce</td>
+                                                <td>Michael Bruce</td>
                                             </tr>
                                             <tr>
-                                                <td>Deluxe Room</td>
-                                                <td>5</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger">Hapus</button>
-                                                </td>
+                                                <td>donna@gmail.com</td>
+                                                <td>Donna</td>
+                                                <td>Snider</td>
+                                                <td>Donna Snider</td>
                                             </tr>
                                         </tbody>
                                     </table>
