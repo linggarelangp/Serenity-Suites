@@ -1,6 +1,6 @@
 <?php
 
-define('BASE_URL', 'http://localhost:80/Serenity-Suites-App');
+define('BASE_URL', 'http://localhost:80/Serenity-Suites');
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
