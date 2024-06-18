@@ -31,7 +31,7 @@ class Hotel_facilities_model
 
     public function getRoleByDate(DateTime $date)
     {
-        $this->db->query('SELECT * FROM ' . $this->table . 'WHERE date LIKE :date');
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE date LIKE :date');
         $this->db->bind(':date', '%' . $date . '%');
 
         $result = $this->db->resultSet();

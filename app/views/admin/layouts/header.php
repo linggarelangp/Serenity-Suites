@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Atlantis Lite - Bootstrap 4 Admin Dashboard</title>
+    <title>Admin</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="<?= BASE_URL; ?>/assets/img/logo-white.svg" type="image/x-icon" />
 

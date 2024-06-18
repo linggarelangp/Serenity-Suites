@@ -11,4 +11,13 @@ class Rooms extends Controller
 
         $this->view('rooms/index', $data);
     }
+
+    public function reservations()
+    {
+        $data = array(
+            'title' => 'Reservation',
+        );
+
+        $this->view('rooms/reservations', $data);
+    }
 }

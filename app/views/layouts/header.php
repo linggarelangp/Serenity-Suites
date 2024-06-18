@@ -17,9 +17,9 @@
 </head>
 
 <body>
-    <nav class="<?php if ( $data['title'] === 'Reservation' || $data['title'] === 'Login' || $data['title'] === 'Register') echo 'd-none' ?> navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="<?php if ($data['title'] === 'Reservation' || $data['title'] === 'Login' || $data['title'] === 'Register') echo 'd-none' ?> navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-            <img src="<?= BASE_URL; ?>/assets/logo/logo-dark.svg"> 
+            <img src="<?= BASE_URL; ?>/assets/logo/logo-dark.svg">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

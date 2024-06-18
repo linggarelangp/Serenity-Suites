@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 class Database
 {
     private string $host = DB_HOST;
@@ -66,7 +68,7 @@ class Database
         return $this->statement->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function single(): object
+    public function single()
     {
         $this->execute();
         return $this->statement->fetch(PDO::FETCH_OBJ);
