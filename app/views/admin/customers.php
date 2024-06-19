@@ -186,40 +186,38 @@
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
+                                                <th>No</th>
+                                                <th>Role</th>
                                                 <th>Email</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
                                                 <th>Full Name</th>
-
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
                                             </tr>
                                         </thead>
+
                                         <tfoot>
                                             <tr>
+                                                <th>No</th>
+                                                <th>Role</th>
                                                 <th>Email</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
                                                 <th>Full Name</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>shad@gmail.com</td>
-                                                <td>Shad</td>
-                                                <td>Decker</td>
-                                                <td>Shad Decker</td>
-                                            </tr>
-                                            <tr>
-                                                <td>bruce@gmail.com</td>
-                                                <td>Michael</td>
-                                                <td>Bruce</td>
-                                                <td>Michael Bruce</td>
-                                            </tr>
-                                            <tr>
-                                                <td>donna@gmail.com</td>
-                                                <td>Donna</td>
-                                                <td>Snider</td>
-                                                <td>Donna Snider</td>
-                                            </tr>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($data['customers'] as $data) : ?>
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $data->roleName; ?></td>
+                                                    <td><?= $data->email; ?></td>
+                                                    <td><?= $data->fullname ?? 'NULL'; ?></td>
+                                                    <td><?= $data->createdAt; ?></td>
+                                                    <td><?= $data->updatedAt; ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>

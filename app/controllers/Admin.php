@@ -1,17 +1,18 @@
 <?php
+session_start();
 
 class Admin extends Controller
 {
-    private string $hotel_facilities_repo = 'hotel_facilities_repo';
-    private string $auth_repo = 'Auth_repo';
+    private string $roles_model = 'roles_model';
+    private string $users_model = 'users_model';
 
     public function index(): void
     {
-        session_start();
 
         if ($_SESSION['roleid'] === 1 && $_SESSION['status'] === true) {
             $data = array(
-                'title' => 'Admin'
+                'title' => 'Dashboard',
+                'roles' => $this->model($this->roles_model)->getAllRoles()
             );
 
             $this->view_admin('admin/index', $data);
@@ -25,6 +26,7 @@ class Admin extends Controller
     {
         $data = array(
             'title' => 'Customers',
+            'customers' => $this->model($this->users_model)->getCustomers()
         );
 
         $this->view_admin('admin/customers', $data);
@@ -33,6 +35,7 @@ class Admin extends Controller
     {
         $data = array(
             'title' => 'Worker',
+            'workers' => $this->model($this->users_model)->getWorkers()
         );
 
         $this->view_admin('admin/worker', $data);
@@ -62,19 +65,5 @@ class Admin extends Controller
         );
 
         $this->view_admin('admin/reservasi', $data);
-    }
-
-    // CRUD
-
-    public function login()
-    {
-    }
-
-    public function add_hotel_facilites()
-    {
-        if ($this->repository($this->hotel_facilities_repo)->add_hotel_facilites($_POST) > 0) {
-            header('location' . BASE_URL . '/admin');
-            exit;
-        }
     }
 }

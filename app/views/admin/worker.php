@@ -36,8 +36,8 @@
                                     <div class="user-box">
                                         <div class="avatar-lg"><img src="<?= BASE_URL ?>/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4>Admin</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            <h4><?= $_SESSION['fullname'] ?? 'Admin'; ?></h4>
+                                            <p class="text-muted"><?= $_SESSION['email']; ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                         </div>
                                     </div>
                                 </li>
@@ -71,7 +71,7 @@
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                             <span>
-                                Admin
+                                <?= $_SESSION['fullname'] ?? 'Admin'; ?>
                                 <span class="user-level">Administrator</span>
                                 <span class="caret"></span>
                             </span>
@@ -115,7 +115,7 @@
                         <div class="collapse show" id="user">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
-                                    <a href="<?= BASE_URL; ?>/admin/customers"">
+                                    <a href="<?= BASE_URL; ?>/admin/customers">
                                         <span class=" sub-item">Customers</span>
                                     </a>
                                 </li>
@@ -186,40 +186,47 @@
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
+                                                <th>No</th>
+                                                <th>Role</th>
                                                 <th>Email</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
                                                 <th>Full Name</th>
-
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
+
                                         <tfoot>
                                             <tr>
+                                                <th>No</th>
+                                                <th>Role</th>
                                                 <th>Email</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
                                                 <th>Full Name</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
+                                                <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>shad@gmail.com</td>
-                                                <td>Shad</td>
-                                                <td>Decker</td>
-                                                <td>Shad Decker</td>
-                                            </tr>
-                                            <tr>
-                                                <td>bruce@gmail.com</td>
-                                                <td>Michael</td>
-                                                <td>Bruce</td>
-                                                <td>Michael Bruce</td>
-                                            </tr>
-                                            <tr>
-                                                <td>donna@gmail.com</td>
-                                                <td>Donna</td>
-                                                <td>Snider</td>
-                                                <td>Donna Snider</td>
-                                            </tr>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($data['workers'] as $data) : ?>
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $data->roleName; ?></td>
+                                                    <td><?= $data->email; ?></td>
+                                                    <td><?= $data->fullname ?? 'NULL'; ?></td>
+                                                    <td><?= $data->createdAt; ?></td>
+                                                    <td><?= $data->updatedAt; ?></td>
+                                                    <td>
+                                                        <?php
+                                                        if ($data->id !== 1 || $_SESSION['email'] === $data->email) : ?>
+                                                            <button class="btn btn-sm btn-warning">Update</button>
+                                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>

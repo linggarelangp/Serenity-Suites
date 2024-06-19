@@ -2,7 +2,7 @@
 
 class Auth extends Controller
 {
-    private string $auth_repo = 'Auth_repo';
+    private string $auth_model = 'Auth_model';
 
     public function login(): void
     {
@@ -26,40 +26,50 @@ class Auth extends Controller
     {
         session_start();
 
-        $data = $this->repository($this->auth_repo)->login($_POST);
-        if (!empty($data)) {
+        $email = preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $_POST['email']) ? true : false;
+        var_dump($email);
 
-            $_SESSION['id'] = $data->id;
-            $_SESSION['roleid'] = $data->roleid;
-            $_SESSION['email'] = $data->email;
-            $_SESSION['firstname'] = $data->firstname;
-            $_SESSION['lastname'] = $data->lastname;
-            $_SESSION['fullname'] = $data->fullname;
-            $_SESSION['status'] = true;
-
-            if ($data->roleid === 1) {
-                header("location: " . BASE_URL . "/admin");
-            } else if ($data->roleid === 2) {
-                header("location: " . BASE_URL . "/staff");
-            } else {
-                header("location: " . BASE_URL . "/home");
-            }
+        if (!$email) {
+            header("location: " . BASE_URL . "/auth/login/failed");
         } else {
-            header("location: " . BASE_URL . "/home");
+            $data = $this->model($this->auth_model)->login($_POST);
+            if (!empty($data)) {
+
+                $_SESSION['id'] = $data->id;
+                $_SESSION['roleid'] = $data->roleid;
+                $_SESSION['email'] = $data->email;
+                $_SESSION['firstname'] = $data->firstname;
+                $_SESSION['lastname'] = $data->lastname;
+                $_SESSION['fullname'] = $data->fullname;
+                $_SESSION['status'] = true;
+
+                if ($data->roleid === 1) {
+                    header("location: " . BASE_URL . "/admin");
+                } else if ($data->roleid === 2) {
+                    header("location: " . BASE_URL . "/staff");
+                } else {
+                    header("location: " . BASE_URL . "/home");
+                }
+            } else {
+                header("location: " . BASE_URL . "/auth/login/failed");
+            }
         }
     }
 
     public function registerValidation()
     {
-        if ($_POST["password"] === $_POST["confirmPassword"]) {
-            if ($this->repository($this->auth_repo)->register($_POST) > 0) {
+        $email = preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $_POST['email']) ? true : false;
 
-                echo "<script>alertSuccess()</script>";
-            } else {
-                echo "<script>alertFailed()</script>";
-            }
+        if (!$email) {
+            header("location: " . BASE_URL . "/auth/register/email");
+        } else if ($_POST["password"] !== $_POST["confirmPassword"]) {
+            header("location: " . BASE_URL . "/auth/register/password");
         } else {
-            echo "<script>alertErrorPasswordAndConfirmPassword()</script>";
+            if ($this->model($this->auth_model)->register($_POST) > 0) {
+                header("location: " . BASE_URL . "/auth/register/success");
+            } else {
+                header("location: " . BASE_URL . "/auth/register/failed");
+            }
         }
     }
 
@@ -71,24 +81,3 @@ class Auth extends Controller
         header("location: " . BASE_URL . "/home");
     }
 }
-?>
-
-<script>
-    function alertSuccess() {
-        alert('Register Successfully!');
-
-        window.location.href = "<?= BASE_URL; ?>/auth/register"
-    }
-
-    function alertFailed() {
-        alert('Register Failed!');
-
-        window.location.href = "<?= BASE_URL; ?>/auth/register"
-    }
-
-    function alertErrorPasswordAndConfirmPassword() {
-        alert('Password and Confirm Password must match!');
-
-        window.location.href = "<?= BASE_URL; ?>/auth/register"
-    }
-</script>

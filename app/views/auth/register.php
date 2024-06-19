@@ -29,3 +29,44 @@
     </form>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  const url = "<?= $_SERVER['REQUEST_URI']; ?>"
+
+  const alert = url.split("/")[4]
+
+
+  if (alert === 'email') {
+    Swal.fire({
+      title: "Register Failed!",
+      text: "Invalid Email Address!",
+      icon: "error",
+    })
+  }
+
+  if (alert === 'password') {
+    Swal.fire({
+      title: "Register Failed!",
+      text: "Password and Confirm Password must match!",
+      icon: "error",
+    })
+  }
+
+  if (alert === 'failed') {
+    Swal.fire({
+      title: "Register Failed!",
+      text: "Error While Registered!",
+      icon: "error",
+    })
+  }
+
+  if (alert === 'success') {
+    Swal.fire({
+      title: "Register Success!",
+      text: "Register Successfully!",
+      icon: "success",
+    })
+  }
+</script>

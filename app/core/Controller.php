@@ -27,9 +27,9 @@ class Controller
     }
 
 
-    public function repository(string | object $repository): object
+    public function model(string | object $model): object
     {
-        require 'app/models/repository/' . $repository . '.php';
-        return new $repository;
+        require 'app/models/' . $model . '.php';
+        return new $model;
     }
 }

@@ -6,15 +6,15 @@ class Staff extends Controller
     public function index(): void
     {
         $data = array(
-            'title' => 'Staff',
+            'title' => 'Dashboard',
         );
-        
+
         $this->view_staff('staff/index', $data);
     }
     public function user(): void
     {
         $data = array(
-            'title' => 'staff',
+            'title' => 'User',
         );
 
         $this->view_staff('staff/user', $data);

@@ -34,7 +34,6 @@
 
 <div id="rooms" class="container">
     <div class="container h-100">
-
     </div>
 
     <div class="row">
@@ -231,7 +230,6 @@
         </div>
     </div>
 </div>
-</div>
 
 <script src="./assets/js/script.js"></script>
 
@@ -242,8 +240,6 @@
             imagePath,
             price
         }
-
-
         window.localStorage.setItem('roomData', JSON.stringify(data))
 
         window.location.href = '<?= BASE_URL; ?>/rooms/reservations#reservation'

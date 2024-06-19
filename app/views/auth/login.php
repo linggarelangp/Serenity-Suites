@@ -24,3 +24,19 @@
       </form>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  const url = "<?= $_SERVER['REQUEST_URI']; ?>"
+
+  const alert = url.split("/")[4]
+
+  if (alert === 'failed') {
+    Swal.fire({
+      title: "Login Failed!",
+      text: "Email or Password Incorrect!",
+      icon: "error",
+    })
+  }
+</script>
