@@ -127,17 +127,31 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item active">
-                        <a href="<?= BASE_URL; ?>/admin/room">
-                            <i class="fas fa-door-open"></i>
-                            <p>Room</p>
+                    <li class="nav-item active submenu">
+                        <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="true">
+                            <i class="fas fa-roomsconfiguration"></i>
+                            <p>Rooms Configuration</p>
+                            <span class="caret"></span>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/Facilities">
-                            <i class="fas fa-door-open"></i>
-                            <p>Room Facilities</p>
-                        </a>
+                        <div class="collapse show" id="roomsconfiguration">
+                            <ul class="nav nav-collapse pb-0 mb-0">
+                                <li class="active">
+                                    <a href="<?= BASE_URL; ?>/admin/room">
+                                        <span class="sub-item">Room</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/admin/details_room">
+                                        <span class="sub-item">Details Room</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/admin/room_facilities">
+                                        <span class="sub-item">Room Facilities</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/admin/reservasi">
@@ -186,8 +200,8 @@
                             <!-- Add Room Modal -->
                             <div class="modal fade" id="addRoomModal" tabindex="-1" aria-labelledby="addRoomModal" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-header border-bottom-0">
                                             <h1 class="modal-title fs-5" id="addRoomModal">Add Room</h1>
                                             <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                         </div>
@@ -201,9 +215,17 @@
                                                     <label for="totalRoom">Total Room</label>
                                                     <input type="number" class="form-control" id="totalRoom" name="totalRoom" placeholder="Enter total">
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="totalRoom">Created At</label>
+                                                    <input type="date" class="form-control" id="totalRoom" name="totalRoom" placeholder="Enter total">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="totalRoom">Update At</label>
+                                                    <input type="date" class="form-control" id="totalRoom" name="totalRoom" placeholder="Enter total">
+                                                </div>
                                             </form>
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer border-top-0">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
@@ -218,6 +240,8 @@
                                             <tr>
                                                 <th>Name Room</th>
                                                 <th>Total Room</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -225,42 +249,38 @@
                                             <tr>
                                                 <th>Name Room</th>
                                                 <th>Total Room</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>Standard Room</td>
-                                                <td>2</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Superior Room</td>
-                                                <td>6</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Deluxe Room</td>
-                                                <td>5</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($data['room'] as $data) : ?>
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $data->nama; ?></td>
+                                                    <td><?= $data->totalroom ?? 'NULL'; ?></td>
+                                                    <td><?= $data->createdAt; ?></td>
+                                                    <td><?= $data->updatedAt; ?></td>
+                                                    <td>
+                                                        <?php
+                                                        if ($data->id !== 1 || $_SESSION['email'] === $data->email) : ?>
+                                                            <button class="btn btn-sm btn-warning">Update</button>
+                                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
 
                                     <!-- Edit Modal -->
                                     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-header border-bottom-0">
                                                     <h1 class="modal-title fs-5" id="editModal">Edit Room</h1>
                                                     <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                                 </div>
@@ -276,7 +296,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="modal-footer">
+                                                <div class="modal-footer border-top-0">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     <button type="button" class="btn btn-primary">Save changes</button>
                                                 </div>
@@ -287,8 +307,8 @@
                                     <!-- Delete Modal -->
                                     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-header border-bottom-0">
                                                     <h1 class="modal-title fs-5" id="deleteModal">Delete Room</h1>
                                                     <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                                 </div>

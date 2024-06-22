@@ -45,17 +45,28 @@ class Admin extends Controller
     {
         $data = array(
             'title' => 'Rooms',
+            // 'room' => $this->model($this->users_model)->getRoom()
         );
 
         $this->view_admin('admin/room', $data);
     }
-    public function facilities(): void
+    public function details_room(): void
     {
         $data = array(
-            'title' => 'Facilities',
+            'title' => 'details_room',
+            //'details_room' => $this->model($this->users_model)->getDetailsRoom()
         );
 
-        $this->view_admin('admin/facilities', $data);
+        $this->view_admin('admin/details_room', $data);
+    }
+    public function room_facilities(): void
+    {
+        $data = array(
+            'title' => 'Room Facilities',
+            //'room_facilities' => $this->model($this->users_model)->getRoomFacilities()
+        );
+
+        $this->view_admin('admin/room_facilities', $data);
     }
 
     public function reservasi(): void

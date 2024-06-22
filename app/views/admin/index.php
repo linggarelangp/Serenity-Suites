@@ -128,16 +128,30 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/room">
-                            <i class="fas fa-door-open"></i>
-                            <p>Room</p>
+                        <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="false">
+                            <i class="fas fa-roomsconfiguration"></i>
+                            <p>Rooms Configuration</p>
+                            <span class="caret"></span>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/Facilities">
-                            <i class="fas fa-door-open"></i>
-                            <p>Room Facilities</p>
-                        </a>
+                        <div class="collapse" id="roomsconfiguration">
+                            <ul class="nav nav-collapse pb-0 mb-0">
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/admin/room">
+                                        <span class=" sub-item">Room</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/admin/details_room">
+                                        <span class=" sub-item">Details Room</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/admin/room_facilities">
+                                        <span class=" sub-item">Room Facilities</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/admin/reservasi">
