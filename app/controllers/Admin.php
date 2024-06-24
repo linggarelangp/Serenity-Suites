@@ -60,6 +60,7 @@ class Admin extends Controller
 
         $this->view_admin('admin/details_room', $data);
     }
+
     public function room_facilities(): void
     {
         $data = array(
@@ -68,6 +69,16 @@ class Admin extends Controller
         );
 
         $this->view_admin('admin/room_facilities', $data);
+    }
+
+    public function facilities_hotel(): void
+    {
+        $data = array(
+            'title' => 'Facilities Hotel',
+            //'room_facilities' => $this->model($this->users_model)->getRoomFacilities()
+        );
+
+        $this->view_admin('admin/facilities_hotel', $data);
     }
 
     public function reservasi(): void
