@@ -50,6 +50,7 @@ class Admin extends Controller
 
         $this->view_admin('admin/room', $data);
     }
+
     public function details_room(): void
     {
         $data = array(

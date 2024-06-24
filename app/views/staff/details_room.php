@@ -49,7 +49,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Account Setting</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="<?= BASE_URL ?>/auth/logout">Logout</a>
+                                    <a class="dropdown-item" href="#">Logout</a>
                                 </li>
                             </div>
                         </ul>
@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <ul class="nav nav-primary">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/staff/index">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
@@ -115,39 +115,39 @@
                         <div class="collapse" id="user">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
-                                    <a href=" <?= BASE_URL; ?>/staff/customers">
+                                    <a href="<?= BASE_URL; ?>/staff/customers"">
                                         <span class=" sub-item">Customers</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href=" <?= BASE_URL; ?>/staff/worker">
-                                        <span class=" sub-item">Worker</span>
+                                    <a href="<?= BASE_URL; ?>/staff/worker">
+                                        <span class="sub-item">Worker</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="false">
-                            <i class="fas fa-roomsconfiguration"></i>
+                    <li class="nav-item active submenu">
+                        <a data-toggle="collapse" href="#detailsroom" class="collapsed" aria-expanded="true">
+                            <i class="fas fa-detailsroom"></i>
                             <p>Rooms Configuration</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse" id="roomsconfiguration">
+                        <div class="collapse show" id="detailsroom">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
                                     <a href="<?= BASE_URL; ?>/staff/room">
-                                        <span class=" sub-item">Room</span>
+                                        <span class="sub-item">Room</span>
                                     </a>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="<?= BASE_URL; ?>/staff/details_room">
-                                        <span class=" sub-item">Details Room</span>
+                                        <span class="sub-item">Details Room</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="<?= BASE_URL; ?>/staff/room_facilities">
-                                        <span class=" sub-item">Room Facilities</span>
+                                        <span class="sub-item">Room Facilities</span>
                                     </a>
                                 </li>
                             </ul>
@@ -168,7 +168,6 @@
     <div class="main-panel">
         <div class="content">
             <div class="page-inner">
-
                 <div class="page-header">
                     <h4 class="page-title">Staff</h4>
                     <ul class="breadcrumbs">
@@ -185,94 +184,75 @@
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Dashboard</a>
+                            <a href="#">Details Room</a>
                         </li>
                     </ul>
-                </div>
-
-                <div class="mt-2 mb-4">
-                    <h2 class="text-white pb-2">Welcome back, Staff!</h2>
-                    <h5 class="text-white op-7 mb-4">Yesterday I was clever, so I wanted to change the world. Today
-                        I am wise, so I am changing myself.</h5>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card card-dark bg-primary-gradient">
-                            <div class="card-body pb-0">
-                                <div class="h1 fw-bold float-right">+5%</div>
-                                <h2 class="mb-2">17</h2>
-                                <p>Users online</p>
-                                <div class="pull-in sparkline-fix chart-as-background">
-                                    <div id="lineChart"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-dark bg-secondary-gradient">
-                            <div class="card-body pb-0">
-                                <div class="h1 fw-bold float-right">-3%</div>
-                                <h2 class="mb-2">27</h2>
-                                <p>New Users</p>
-                                <div class="pull-in sparkline-fix chart-as-background">
-                                    <div id="lineChart2"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-dark bg-success2">
-                            <div class="card-body pb-0">
-                                <div class="h1 fw-bold float-right">+7%</div>
-                                <h2 class="mb-2">213</h2>
-                                <p>Transactions</p>
-                                <div class="pull-in sparkline-fix chart-as-background">
-                                    <div id="lineChart3"><canvas width="327" height="70" style="display: inline-block; width: 327px; height: 70px; vertical-align: top;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Table Roles</h4>
+                            <div class="card-header d-flex justify-content-between">
+                                <h4 class="card-title">Table Details Room</h4>
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">Add Room</button>
                             </div>
+
+                            <!-- Add Room Modal -->
+                            <div class="modal fade" id="addRoomModal" tabindex="-1" aria-labelledby="addRoomModal" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-header border-bottom-0">
+                                            <h1 class="modal-title fs-5" id="addRoomModal">Add Room</h1>
+                                            <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="RoomName">Name Room</label>
+                                                    <input type="text" class="form-control" id="RoomName" name="RoomName" placeholder="Enter name">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="totalRoom">Total Room</label>
+                                                    <input type="number" class="form-control" id="totalRoom" name="totalRoom" placeholder="Enter total">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer border-top-0">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Name</th>
-                                                <th>Created At</th>
-                                                <th>Updated At</th>
+                                                <th>Name Room</th>
+                                                <th>Total Room</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Name</th>
-                                                <th>Created At</th>
-                                                <th>Updated At</th>
+                                                <th>Name Room</th>
+                                                <th>Total Room</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <?php
-                                            $no = 1;
-                                            foreach ($data['roles'] as $data) : ?>
-                                                <tr>
-                                                    <td><?= $no++; ?></td>
-                                                    <td><?= $data->name; ?></td>
-                                                    <td><?= $data->createdAt; ?></td>
-                                                    <td><?= $data->updatedAt; ?></td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                            <tr>
+                                                <td>Standard Room</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Superior Room</td>
+                                                <td>6</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Deluxe Room</td>
+                                                <td>5</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

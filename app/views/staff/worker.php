@@ -36,8 +36,8 @@
                                     <div class="user-box">
                                         <div class="avatar-lg"><img src="<?= BASE_URL ?>/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4>Staff</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            <h4><?= $_SESSION['fullname'] ?? 'Staff'; ?></h4>
+                                            <p class="text-muted"><?= $_SESSION['email']; ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                         </div>
                                     </div>
                                 </li>
@@ -71,7 +71,7 @@
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                             <span>
-                                Staff
+                                <?= $_SESSION['fullname'] ?? 'Staff'; ?>
                                 <span class="user-level">Staff</span>
                                 <span class="caret"></span>
                             </span>
@@ -106,17 +106,52 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/staff/user">
+                    <li class="nav-item active submenu">
+                        <a data-toggle="collapse" href="#user" class="collapsed" aria-expanded="true">
                             <i class="fas fa-user"></i>
                             <p>User</p>
+                            <span class="caret"></span>
                         </a>
+                        <div class="collapse show" id="user">
+                            <ul class="nav nav-collapse pb-0 mb-0">
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/staff/customers">
+                                        <span class=" sub-item">Customers</span>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="<?= BASE_URL; ?>/staff/worker">
+                                        <span class="sub-item">Worker</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                    <li class="nav-item active">
-                        <a href="<?= BASE_URL; ?>/staff/kamar">
-                            <i class="fas fa-door-open"></i>
-                            <p>Kamar</p>
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="false">
+                            <i class="fas fa-roomsconfiguration"></i>
+                            <p>Rooms Configuration</p>
+                            <span class="caret"></span>
                         </a>
+                        <div class="collapse" id="roomsconfiguration">
+                            <ul class="nav nav-collapse pb-0 mb-0">
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/staff/room">
+                                        <span class=" sub-item">Room</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/staff/details_room">
+                                        <span class=" sub-item">Details Room</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= BASE_URL; ?>/staff/room_facilities">
+                                        <span class=" sub-item">Room Facilities</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/staff/reservasi">
@@ -149,7 +184,7 @@
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Kamar</a>
+                            <a href="#">Worker</a>
                         </li>
                     </ul>
                 </div>
@@ -157,57 +192,46 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Table User</h4>
+                            <div class="card-header d-flex justify-content-between">
+                                <h4 class="card-title">Table Worker</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>No</th>
+                                                <th>Role</th>
+                                                <th>Email</th>
+                                                <th>Full Name</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
                                             </tr>
                                         </thead>
+
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>No</th>
+                                                <th>Role</th>
+                                                <th>Email</th>
+                                                <th>Full Name</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>Shad Decker</td>
-                                                <td>Regional Director</td>
-                                                <td>Edinburgh</td>
-                                                <td>51</td>
-                                                <td>2008/11/13</td>
-                                                <td>$183,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Michael Bruce</td>
-                                                <td>Javascript Developer</td>
-                                                <td>Singapore</td>
-                                                <td>29</td>
-                                                <td>2011/06/27</td>
-                                                <td>$183,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>27</td>
-                                                <td>2011/01/25</td>
-                                                <td>$112,000</td>
-                                            </tr>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($data['workers'] as $data) : ?>
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $data->roleName; ?></td>
+                                                    <td><?= $data->email; ?></td>
+                                                    <td><?= $data->fullname ?? 'NULL'; ?></td>
+                                                    <td><?= $data->createdAt; ?></td>
+                                                    <td><?= $data->updatedAt; ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
