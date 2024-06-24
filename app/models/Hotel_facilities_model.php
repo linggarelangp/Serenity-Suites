@@ -52,9 +52,9 @@ class Hotel_facilities_model
         return $this->db->rowCount();
     }
 
-    public function updateHotelFacilites($data)
+    public function updateHotelFacilites($id, $data)
     {
-        $this->db->query('INSERT INTO ' . $this->table . '(name) VALUES(:name)');
+        $this->db->query('UPDATE ' . $this->table . ' SET name = :name');
         $this->db->bind(':name', $data['name']);
 
         $this->db->execute();

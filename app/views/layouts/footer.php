@@ -1,4 +1,4 @@
-<div class="<?php if ( $data['title'] === 'Reservation' || $data['title'] === 'Login' || $data['title'] === 'Register') echo 'd-none' ?> container">
+<div class="<?php if ($data['title'] === 'Reservation' || $data['title'] === 'Login' || $data['title'] === 'Register') echo 'd-none' ?> container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <p class="col-md-4 mb-0 text-body-secondary">© Serenity Suites 2024 Company, Inc</p>
 

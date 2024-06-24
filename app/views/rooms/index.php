@@ -1,3 +1,4 @@
+<!-- Pencarian -->
 <div class="mb-5">
     <div class="facilities-hero">
         <div class="container h-100 align-content-center">
@@ -31,6 +32,7 @@
         </div>
     </div>
 </div>
+<!-- End Pencarian -->
 
 <div id="rooms" class="container">
     <div class="container h-100">
@@ -94,139 +96,56 @@
                 <h3 class="text-center">Our Rooms in Serenity Suites</h3>
             </div>
             <hr>
-            <div class="card w-100 position-relative shadow rounded-5 mb-5 border-0">
-                <div class="card-body m-0 p-0">
-                    <div class="d-flex">
-                        <div class="col-md-5 me-2">
-                            <img src="<?= BASE_URL; ?>/assets/img/superior.jpg" class="card-img-top object-fit-cover rounded-start-4 ">
-                        </div>
 
-                        <div class="position-relative col-md p-3">
-                            <h5>Superior Single Bed</h5>
-
-                            <p class="mt-3">Facilities</p>
-
-                            <div class="w-100">
-                                <ul class="d-flex flex-wrap pe-5 list-unstyled">
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="bi bi-tv"></i></span> TV</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa fa-bath"></i></span> Bathroom</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa-solid fa-fan"></i></span> AC</li>
-                                </ul>
+            <?php
+            foreach ($data["rooms"] as $room) :
+            ?>
+                <div class="card w-100 position-relative shadow rounded-5 mb-5 border-0">
+                    <div class="card-body m-0 p-0">
+                        <div class="d-flex">
+                            <div class="col-md-5 me-2">
+                                <img src="<?= BASE_URL; ?>/<?= $room->path_image; ?>" class="card-img-top object-fit-cover rounded-start-4 ">
                             </div>
 
-                            <div class="position-absolute bottom-0 start-0">
-                                <h5 class="ps-3 pb-3">IDR 99,999</h5>
-                            </div>
+                            <div class="position-relative col-md p-3">
+                                <h5><?= $room->name; ?></h5>
 
-                            <div class="position-absolute bottom-0 end-0 pe-4 pb-3">
-                                <button onclick="addRoomToLocalStroage('Superior Single Bed', '<?= BASE_URL; ?>/assets/img/superior.jpg', '99,999')" class="btn btn-sm btn-primary rounded-pill me-1">Book Now</button>
-                                <button class="btn btn-sm btn-success rounded-pill">Detail</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <p class="mt-3">Facilities :</p>
 
-            <div class="card w-100 position-relative shadow rounded-5 mb-5 border-0">
-                <div class="card-body m-0 p-0">
-                    <div class="d-flex">
-                        <div class="col-md-5 me-2">
-                            <img src="<?= BASE_URL; ?>/assets/img/superior-twin.jpg" class="card-img-top object-fit-cover rounded-start-4 ">
-                        </div>
 
-                        <div class="position-relative col-md p-3">
-                            <h5>Superior Double Bed</h5>
+                                <div class="w-100">
+                                    <ul class="d-flex flex-col pe-5 list-unstyled">
+                                        <?php foreach ($data["details_room"] as $room_facility) : ?>
+                                            <?php if ($room->id === $room_facility->id) : ?>
+                                                <?php if ($room_facility->room_facilities_name === 'TV') : ?>
+                                                    <li class="me-3 mb-2"><span class="text-black"><i class="bi bi-tv"></i></span> <?= $room_facility->room_facilities_name; ?></li>
+                                                <?php endif; ?>
 
-                            <p class="mt-3">Facilities</p>
+                                                <?php if ($room_facility->room_facilities_name === 'AC') : ?>
+                                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa-solid fa-fan"></i></span> <?= $room_facility->room_facilities_name; ?></li>
+                                                <?php endif; ?>
 
-                            <div class="w-100">
-                                <ul class="d-flex flex-wrap pe-5 list-unstyled">
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="bi bi-tv"></i></span> TV</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa fa-bath"></i></span> Bathroom</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa-solid fa-fan"></i></span> AC</li>
-                                </ul>
-                            </div>
+                                                <?php if ($room_facility->room_facilities_name === 'Bathroom') : ?>
+                                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa fa-bath"></i></span> <?= $room_facility->room_facilities_name; ?></li>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
 
-                            <div class="position-absolute bottom-0 start-0">
-                                <h5 class="ps-3 pb-3">IDR 112,000</h5>
-                            </div>
+                                <div class="position-absolute bottom-0 start-0">
+                                    <h5 class="ps-3 pb-3"><span>IDR</span> <?= number_format($room->price); ?></h5>
+                                </div>
 
-                            <div class="position-absolute bottom-0 end-0 pe-4 pb-3">
-                                <button onclick="addRoomToLocalStroage('Superior Double Bed', '<?= BASE_URL; ?>/assets/img/superior-twin.jpg', '112,000')" class="btn btn-sm btn-primary rounded-pill me-1">Book Now</button>
-                                <button class="btn btn-sm btn-success rounded-pill">Detail</button>
+                                <div class="position-absolute bottom-0 end-0 pe-4 pb-3">
+                                    <button onclick="addRoomToLocalStroage('Superior Double Bed', '<?= BASE_URL; ?>/assets/img/superior-twin.jpg', '112,000')" class="btn btn-sm btn-primary rounded-pill me-1">Book Now</button>
+                                    <button class="btn btn-sm btn-success rounded-pill">Detail</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card w-100 position-relative shadow rounded-5 mb-5 border-0">
-                <div class="card-body m-0 p-0">
-                    <div class="d-flex">
-                        <div class="col-md-5 me-2">
-                            <img src="<?= BASE_URL; ?>/assets/img/deluxe.jpg" class="card-img-top object-fit-cover rounded-start-4 ">
-                        </div>
-
-                        <div class="position-relative col-md p-3">
-                            <h5>Deluxe Single Bed</h5>
-
-                            <p class="mt-3">Facilities</p>
-
-                            <div class="w-100">
-                                <ul class="d-flex flex-wrap pe-5 list-unstyled">
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="bi bi-tv"></i></span> TV</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="bi bi-cup-hot"></i></span> Coffe Maker</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa fa-bath"></i></span> Bathroom</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa-solid fa-fan"></i></span> AC</li>
-                                </ul>
-                            </div>
-
-                            <div class="position-absolute bottom-0 start-0">
-                                <h5 class="ps-3 pb-3">IDR 174,000</h5>
-                            </div>
-
-                            <div class="position-absolute bottom-0 end-0 pe-4 pb-3">
-                                <button onclick="addRoomToLocalStroage('Deluxe Single Bed', '<?= BASE_URL; ?>/assets/img/deluxe.jpg', '174,000')" class="btn btn-sm btn-primary rounded-pill me-1">Book Now</button>
-                                <button class="btn btn-sm btn-success rounded-pill">Detail</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card w-100 position-relative shadow rounded-5 mb-5 border-0">
-                <div class="card-body m-0 p-0">
-                    <div class="d-flex">
-                        <div class="col-md-5 me-2">
-                            <img src="<?= BASE_URL; ?>/assets/img/deluxe-twin.jpg" class="card-img-top object-fit-cover rounded-start-4 ">
-                        </div>
-
-                        <div class="position-relative col-md p-3">
-                            <h5>Deluxe Double Bed</h5>
-
-                            <p class="mt-3">Facilities</p>
-
-                            <div class="w-100">
-                                <ul class="d-flex flex-wrap pe-5 list-unstyled">
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="bi bi-tv"></i></span> TV</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="bi bi-cup-hot"></i></span> Coffe Maker</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa fa-bath"></i></span> Bathroom</li>
-                                    <li class="me-3 mb-2"><span class="text-black"><i class="fa-solid fa-fan"></i></span> AC</li>
-                                </ul>
-                            </div>
-
-                            <div class="position-absolute bottom-0 start-0">
-                                <h5 class="ps-3 pb-3">IDR 199,000</h5>
-                            </div>
-
-                            <div class="position-absolute bottom-0 end-0 pe-4 pb-3">
-                                <button onclick="addRoomToLocalStroage('Deluxe Double Bed', '<?= BASE_URL; ?>/assets/img/deluxe-twin.jpg', '199,000')" class=" btn btn-sm btn-primary rounded-pill me-1">Book Now</button>
-                                <button class=" btn btn-sm btn-success rounded-pill">Detail</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

@@ -34,8 +34,10 @@ class Roles_model
         $this->db->query('SELECT * FROM ' . $this->table . 'WHERE date LIKE :date');
         $this->db->bind(':date', '%' . $date . '%');
 
-        if (count($$this->db->single()) >= 0) {
-            return $this->db->single();
+        $result = $this->db->single();
+
+        if ($result) {
+            return $result;
         }
 
         return $this->getAllRoles();
