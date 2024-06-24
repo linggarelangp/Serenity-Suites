@@ -2,7 +2,6 @@
     <div class="main-header">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark2">
-
             <a href="index.html" class="logo">
                 <img src="<?= BASE_URL; ?>/assets/img/logo-white.svg" alt="navbar brand" class="navbar-brand">
             </a>
@@ -36,12 +35,12 @@
                                     <div class="user-box">
                                         <div class="avatar-lg"><img src="<?= BASE_URL ?>/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4>Admin</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            <h4><?= $_SESSION['fullname'] ?? 'None'; ?></h4>
+                                            <p class="text-muted"><?= $_SESSION['email']; ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                         </div>
                                     </div>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">My Profile</a>
                                     <a class="dropdown-item" href="#">My Balance</a>
@@ -50,7 +49,7 @@
                                     <a class="dropdown-item" href="#">Account Setting</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Logout</a>
-                                </li>
+                                </li> -->
                             </div>
                         </ul>
                     </li>
@@ -71,8 +70,8 @@
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                             <span>
-                                Admin
-                                <span class="user-level">Administrator</span>
+                                <?= $_SESSION['fullname'] ?? 'None'; ?>
+                                <span class="user-level"><?= $_SESSION['roleid'] === 1 ? "Admin" : "Staff"; ?></span>
                                 <span class="caret"></span>
                             </span>
                         </a>
@@ -115,7 +114,7 @@
                         <div class="collapse" id="user">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
-                                    <a href="<?= BASE_URL; ?>/admin/customers"">
+                                    <a href="<?= BASE_URL; ?>/admin/customers">
                                         <span class=" sub-item">Customers</span>
                                     </a>
                                 </li>
@@ -129,14 +128,14 @@
                     </li>
                     <li class="nav-item active submenu">
                         <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="true">
-                            <i class="fas fa-roomsconfiguration"></i>
+                            <i class="fas fa-door-open"></i>
                             <p>Rooms Configuration</p>
                             <span class="caret"></span>
                         </a>
                         <div class="collapse show" id="roomsconfiguration">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
-                                    <a href="<?= BASE_URL; ?>/admin/room">
+                                    <a href="<?= BASE_URL; ?>/admin/rooms">
                                         <span class="sub-item">Room</span>
                                     </a>
                                 </li>
@@ -200,37 +199,30 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title">Table Room Facilities</h4>
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addroom_facilitiesModal">Add Foom Facilities</button>
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#add_room_facilitiesModal">Add Foom Facilities</button>
                             </div>
 
                             <!-- Add Room Facilities Modal -->
-                            <div class="modal fade" id="addroom_facilitiesModal" tabindex="-1" aria-labelledby="addroom_facilitiesModal" aria-hidden="true">
+                            <div class="modal fade" id="add_room_facilitiesModal" tabindex="-1" aria-labelledby="add_room_facilitiesModal" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content bg-dark">
                                         <div class="modal-header border-bottom-0">
-                                            <h1 class="modal-title fs-5" id="addroom_facilitiesModal">Add Room Facilities</h1>
-                                            <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                            <h1 class="modal-title fs-5" id="add_room_facilitiesModal">Add Room Facilities</h1>
+                                            <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                         </div>
-                                        <div class="modal-body">
-                                            <form>
+                                        <form method="POST" action="<?= BASE_URL; ?>/room_facilities/addRoomFacilities">
+                                            <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="room_facilitiesName">Name Room Facilities</label>
-                                                    <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name">
+                                                    <label for="room_facilitiesName">Facilities Name</label>
+                                                    <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name" name="name_facility_room">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="CreateAt">Create At</label>
-                                                    <input type="date" class="form-control" id="CreateAt" placeholder="Enter Create At">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="UpdateAt">Update At</label>
-                                                    <input type="date" class="form-control" id="UpdateAt" placeholder="Enter Update At">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer border-top-0">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
+                                            </div>
+                                            <div class="modal-footer border-top-0">
+                                                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="reset" class="btn  btn-sm btn-info">Reset</button>
+                                                <button type="submit" class="btn btn-sm btn-primary">Add</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -240,6 +232,7 @@
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
+                                                <th>No</th>
                                                 <th>Name</th>
                                                 <th>Create At</th>
                                                 <th>Update At</th>
@@ -248,91 +241,89 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name Room Facilities</th>
+                                                <th>No</th>
+                                                <th>Name</th>
                                                 <th>Create At</th>
                                                 <th>Update At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>Standard Room Facilities</td>
-                                                <td>2</td>
-                                                <td>2</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Superior Room Facilities</td>
-                                                <td>6</td>
-                                                <td>6</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Deluxe Room Facilities</td>
-                                                <td>5</td>
-                                                <td>5</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($data["room_facilities"] as $room_facilities) :
+                                            ?>
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $room_facilities->name; ?></td>
+                                                    <td><?= $room_facilities->createdAt; ?></td>
+                                                    <td><?= $room_facilities->updatedAt; ?></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#updateModalRoomFacilities<?= $room_facilities->id; ?>">Edit</button>
+                                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $room_facilities->id; ?>">Delete</button>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Update Modal -->
+                                                <div class="modal fade" id="updateModalRoomFacilities<?= $room_facilities->id; ?>" tabindex="-1" aria-labelledby="updateModalRoomFacilities" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-dark">
+                                                            <div class="modal-header border-bottom-0">
+                                                                <h1 class="modal-title fs-5" id="updateModalRoomFacilities">Update Room Facilities</h1>
+                                                                <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                            </div>
+                                                            <form method="POST" action="<?= BASE_URL; ?>/room_facilities/updateRoomFacilities">
+                                                                <div class="modal-body">
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name" value="<?= $room_facilities->id; ?>" name="id_room_facilities">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="room_facilitiesName">Name Room Facilities</label>
+                                                                        <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name" value="<?= $room_facilities->name; ?>" name="name_facility_room">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer border-top-0">
+                                                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Delete Modal -->
+                                                <div class="modal fade" id="deleteModal<?= $room_facilities->id; ?>" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-dark">
+                                                            <div class="modal-header border-bottom-0">
+                                                                <h1 class="modal-title fs-5">Delete Room Facilities</h1>
+                                                                <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                            </div>
+                                                            <form method="POST" action="<?= BASE_URL; ?>/room_facilities/deleteRoomFacilities">
+                                                                <div class="modal-body">
+                                                                    <p class="text-center">Are you sure you want to delete this Room Facilities?</p>
+
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name" value="<?= $room_facilities->id; ?>" name="id_room_facilities">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="room_facilitiesName">Name Room Facilities</label>
+                                                                        <input type="text" class="text-white form-control-plaintext border border-1 rounded-5 px-3" id="room_facilitiesName" placeholder="Enter name" value="<?= $room_facilities->name; ?>" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer border-top-0">
+                                                                    <button type=" button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
-
-                                    <!-- Edit Modal -->
-                                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content bg-dark">
-                                                <div class="modal-header border-bottom-0">
-                                                    <h1 class="modal-title fs-5" id="editModal">Edit Room Facilities</h1>
-                                                    <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="room_facilitiesName">Name Room Facilities</label>
-                                                            <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="CreateAt">Create At</label>
-                                                            <input type="date" class="form-control" id="CreateAt" placeholder="Enter Create At">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="UpdateAt">Update At</label>
-                                                            <input type="date" class="form-control" id="UpdateAt" placeholder="Enter Update At">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer border-top-0"">
-                                                    <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content bg-dark">
-                                                <div class="modal-header border-bottom-0">
-                                                    <h1 class="modal-title fs-5" id="deleteModal">Delete Room Facilities</h1>
-                                                    <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Are you sure you want to delete this Room Facilities?</p>
-                                                    <button type="button" class="btn btn-danger">Delete</button>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -369,3 +360,54 @@
         </footer>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const url = "<?= $_SERVER['REQUEST_URI']; ?>"
+
+    const getLastUrl = url.split("/")[4]
+    const alert = getLastUrl[0].toUpperCase() + getLastUrl.slice(1)
+
+    if (alert === 'Failed') {
+        Swal.fire({
+            title: "Error",
+            text: "Input Fields Cannot be empty!",
+            icon: "error",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+
+    if (alert === 'Error') {
+        Swal.fire({
+            title: "Opss",
+            text: `Error!`,
+            icon: "error",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+    const method = ["Added", "Updated", "Deleted"]
+
+    if (method.includes(alert)) {
+        Swal.fire({
+            title: "Success",
+            text: `Data Has Been ${alert}!`,
+            icon: "success",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+    function redirect() {
+        window.location.href = "<?= BASE_URL ?>/admin/room_facilities"
+    }
+</script>

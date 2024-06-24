@@ -21,7 +21,7 @@ class Auth_model
     public function register($data)
     {
         $dateNow = date_create('now')->format('Y-m-d');
-        $this->db->query("INSERT INTO " . $this->table . "(roleid, email , password, createdAt, updatedAt) VALUES(2, :email, :password, '$dateNow', '$dateNow')");
+        $this->db->query("INSERT INTO " . $this->table . "(roleid, email , password, createdAt, updatedAt) VALUES(3, :email, :password, '$dateNow', '$dateNow')");
         $this->db->bind(":email", $data["email"]);
         $this->db->bind(":password", $data["password"]);
 

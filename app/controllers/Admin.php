@@ -5,6 +5,9 @@ class Admin extends Controller
 {
     private string $roles_model = 'roles_model';
     private string $users_model = 'users_model';
+    private string $rooms_model = 'rooms_model';
+    private string $room_facilities_model = 'rooms_facilities_model';
+    private string $details_room_model = 'details_room_model';
 
     public function index(): void
     {
@@ -31,6 +34,7 @@ class Admin extends Controller
 
         $this->view_admin('admin/customers', $data);
     }
+
     public function worker(): void
     {
         $data = array(
@@ -41,21 +45,23 @@ class Admin extends Controller
         $this->view_admin('admin/worker', $data);
     }
 
-    public function room(): void
+    public function rooms(): void
     {
         $data = array(
             'title' => 'Rooms',
-            // 'room' => $this->model($this->users_model)->getRoom()
+            'rooms' => $this->model($this->rooms_model)->getAllRooms()
         );
 
-        $this->view_admin('admin/room', $data);
+        $this->view_admin('admin/rooms', $data);
     }
 
     public function details_room(): void
     {
         $data = array(
             'title' => 'details_room',
-            //'details_room' => $this->model($this->users_model)->getDetailsRoom()
+            'details_room' => $this->model($this->details_room_model)->getAllDetailsRoom(),
+            'rooms' => $this->model($this->rooms_model)->getAllRooms(),
+            'room_facilities' => $this->model($this->room_facilities_model)->getAllRoomFacilities()
         );
 
         $this->view_admin('admin/details_room', $data);
@@ -65,7 +71,7 @@ class Admin extends Controller
     {
         $data = array(
             'title' => 'Room Facilities',
-            //'room_facilities' => $this->model($this->users_model)->getRoomFacilities()
+            'room_facilities' => $this->model($this->room_facilities_model)->getAllRoomFacilities()
         );
 
         $this->view_admin('admin/room_facilities', $data);

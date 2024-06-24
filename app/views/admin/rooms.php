@@ -128,19 +128,19 @@
                         </div>
                     </li>
                     <li class="nav-item active submenu">
-                        <a data-toggle="collapse" href="#detailsroom" class="collapsed" aria-expanded="true">
+                        <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="true">
                             <i class="fas fa-door-open"></i>
                             <p>Rooms Configuration</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse show" id="detailsroom">
+                        <div class="collapse show" id="roomsconfiguration">
                             <ul class="nav nav-collapse pb-0 mb-0">
-                                <li>
+                                <li class="active">
                                     <a href="<?= BASE_URL; ?>/admin/rooms">
                                         <span class="sub-item">Room</span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="<?= BASE_URL; ?>/admin/details_room">
                                         <span class="sub-item">Details Room</span>
                                     </a>
@@ -152,12 +152,6 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/facilities_hotel">
-                            <i class="fas fa-database"></i>
-                            <p>Facilities Hotel</p>
-                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/admin/reservasi">
@@ -190,7 +184,7 @@
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Details Room</a>
+                            <a href="#">Room</a>
                         </li>
                     </ul>
                 </div>
@@ -199,7 +193,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title">Table Detail Rooms</h4>
+                                <h4 class="card-title">Table Room</h4>
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">Add Room</button>
                             </div>
 
@@ -208,32 +202,33 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content bg-dark">
                                         <div class="modal-header border-bottom-0">
-                                            <h1 class="modal-title fs-5" id="addRoomModal">Add Detail Room</h1>
+                                            <h1 class="modal-title fs-5" id="addRoomModal">Add Room</h1>
                                             <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                         </div>
-                                        <form method="POST" action="<?= BASE_URL ?>/details_room/addDetailsRoom">
+                                        <form method="POST" action="<?= BASE_URL; ?>/rooms/addrooms" enctype="multipart/form-data">
                                             <div class="modal-body">
-                                                <label class="mb-2 px-2">Select Room Name</label>
-                                                <div class="input-group mb-3 px-2">
-                                                    <select class="custom-select" name="room_id">
-                                                        <?php foreach ($data["rooms"] as $room) : ?>
-                                                            <option value="<?= $room->id; ?>">[Room ID: <?= $room->id; ?>] &nbsp; <?= $room->name; ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
+                                                <div class="form-group">
+                                                    <label>Name Room</label>
+                                                    <input type="text" class="form-control" placeholder="Enter name" name="name">
                                                 </div>
 
-                                                <label class="mb-2 px-2">Select Room Facility</label>
-                                                <div class="input-group mb-3 px-2">
-                                                    <select class="custom-select" name="facility_id">
-                                                        <?php foreach ($data["room_facilities"] as $facilities) : ?>
-                                                            <option value="<?= $facilities->id; ?>">[Facility ID: <?= $facilities->id; ?>] &nbsp; <?= $facilities->name; ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
+                                                <div class="form-group">
+                                                    <label>Price Room</label>
+                                                    <input type="text" class="form-control" placeholder="Enter Price" name="room_price">
                                                 </div>
+
+                                                <div class="m-2">
+                                                    <label class="form-label">Room Image</label>
+                                                    <input class="form-control form-control-sm mt-2" type="file" id="formFile" name="room_image">
+                                                </div>
+
+                                                <p style="font-size: 0.8rem; font-weight: 300; letter-spacing: .05rem;" class="mb-0 ml-3 text-white">Format must be jpg, png, jpeg</p>
+                                                <p style="font-size: 0.8rem; font-weight: 300; letter-spacing: .05rem;" class="ml-3 text-white">image size maximum 2MB</p>
+
                                             </div>
-
                                             <div class="modal-footer border-top-0">
                                                 <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="reset" class="btn btn-sm btn-info">Reset</button>
                                                 <button type="submit" class="btn btn-sm btn-primary">Add</button>
                                             </div>
                                         </form>
@@ -243,68 +238,145 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="basic-datatables" class="display table table-striped table-hover">
+                                    <table id="basic-datatables" class="display table table-striped table-hover text-center">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Room</th>
-                                                <th>Name Facilities Room</th>
+                                                <th>Name Room</th>
+                                                <th>Image</th>
+                                                <th>Price (IDR)</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Room</th>
-                                                <th>Name Facilities Room</th>
+                                                <th>Name Room</th>
+                                                <th>Image</th>
+                                                <th>Price (IDR)</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            foreach ($data["details_room"] as $detail) :
-                                            ?>
+                                            foreach ($data['rooms'] as $room) : ?>
                                                 <tr>
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $detail->name; ?></td>
-                                                    <td><?= $detail->room_facilities_name; ?></td>
+                                                    <td><?= $room->name; ?></td>
+                                                    <td class="w-full h-auto d-flex justify-content-center my-2">
+                                                        <div class="card m-0 p-0" style="width: 10rem;">
+                                                            <img src="<?= BASE_URL . "/" . $room->path_image; ?>" class="card-img-top">
+                                                        </div>
+                                                    </td>
+                                                    <td><?= number_format($room->price); ?></td>
+                                                    <td><?= $room->createdAt; ?></td>
+                                                    <td><?= $room->updatedAt; ?></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-sm btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Update</button>
-                                                        <button type="button" class="btn btn-sm btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $detail->id; ?>">Delete</button>
+                                                        <button type="button" class="w-100 btn btn-sm btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#updateRoomModal<?= $room->id; ?>">Update</button>
+                                                        <button type="button" class="w-100 btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteRoomModal<?= $room->id; ?>">Delete</button>
                                                     </td>
                                                 </tr>
 
-                                                <!-- Delete Modal -->
-                                                <div class="modal fade" id="deleteModal<?= $detail->id; ?>" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                                                <!-- Update Modal -->
+                                                <div class="modal fade" id="updateRoomModal<?= $room->id; ?>" tabindex="-1" aria-labelledby="updateRoomModal" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content bg-dark">
                                                             <div class="modal-header border-bottom-0">
-                                                                <h1 class="modal-title fs-5" id="deleteModal">Delete Details Room</h1>
+                                                                <h1 class="modal-title fs-5" id="updateRoomModal">Update Room</h1>
                                                                 <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                                             </div>
-                                                            <form method="POST" action="<?= BASE_URL; ?>/details_room/deleteDetailsRoom">
+
+                                                            <form method="POST" action="<?= BASE_URL; ?>/rooms/updateRooms" enctype="multipart/form-data">
                                                                 <div class="modal-body">
-                                                                    <p class="text-center">Are you sure you want to delete this Details Room?</p>
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name" value="<?= $room->id; ?>" name="room_id">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Name Room</label>
+                                                                        <input type="text" class="form-control" placeholder="Enter name" name="update_room_name" value="<?= $room->name; ?>">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Room Price</label>
+                                                                        <input type="text" class="form-control" placeholder="Enter Price" name="update_room_price" value="<?= $room->price; ?>">
+                                                                    </div>
 
                                                                     <div class="d-none form-group">
-                                                                        <input type="text" class="form-control" value="<?= $detail->detail_id; ?>" name="details_room_id">
+                                                                        <input type="text" class="form-control" name="current_image_room" value="<?= $room->path_image; ?>">
+                                                                    </div>
+
+                                                                    <div class="m-2">
+                                                                        <label class="form-label">
+                                                                            Room Image
+                                                                            <span class="font-italic">
+                                                                                (image can be null if you just change room name or price)
+                                                                            </span>
+                                                                        </label>
+
+                                                                        <input class="form-control form-control-sm mt-2" type="file" id="formFile" name="room_image">
+                                                                    </div>
+
+                                                                    <p style="font-size: 0.8rem; font-weight: 300; letter-spacing: .05rem;" class="mb-0 ml-3 text-white">Format must be jpg, png, jpeg</p>
+                                                                    <p style="font-size: 0.8rem; font-weight: 300; letter-spacing: .05rem;" class="mb-0 ml-3 text-white">image size maximum 2MB</p>
+                                                                </div>
+                                                                <div class="modal-footer border-top-0">
+                                                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="reset" class="btn btn-sm btn-info">Reset</button>
+                                                                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Delete Modal -->
+                                                <div class="modal fade" id="deleteRoomModal<?= $room->id; ?>" tabindex="-1" aria-labelledby="deleteRoomModal" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-dark">
+                                                            <div class="modal-header border-bottom-0">
+                                                                <h1 class="modal-title fs-5" id="deleteModal">Delete Room</h1>
+                                                                <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                            </div>
+
+                                                            <form method="POST" action="<?= BASE_URL; ?>/rooms/deleteRooms">
+                                                                <div class="modal-body">
+                                                                    <p class="text-center">Are you sure you want to delete this Room?</p>
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name" value="<?= $room->id; ?>" name="room_id">
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label>Room</label>
-                                                                        <input type="text" class="text-white form-control-plaintext border border-1 rounded-5 px-3" value="<?= $detail->name; ?>" readonly>
+                                                                        <label>Name Room</label>
+                                                                        <input type="text" class="text-white form-control-plaintext border border-1 rounded-5 px-3" placeholder="Enter name" name="delete_room_name" value="<?= $room->name; ?>" readonly>
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label>Name Facility Room</label>
-                                                                        <input type="text" class="text-white form-control-plaintext border border-1 rounded-5 px-3" value="<?= $detail->room_facilities_name; ?>" readonly>
+                                                                        <label>Room Price</label>
+                                                                        <input type="text" class="text-white form-control-plaintext border border-1 rounded-5 px-3" placeholder="Enter name" name="delete_room_name" value="<?= $room->price; ?>" readonly>
+                                                                    </div>
+
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" name="delete_room_image" value="<?= $room->path_image; ?>">
+                                                                    </div>
+
+                                                                    <p class="text-center">Image Preview</p>
+
+                                                                    <div class="w-100 d-flex justify-content-center">
+                                                                        <div class="card m-0 p-0" style="width: 14rem;">
+                                                                            <img src="<?= BASE_URL . "/" . $room->path_image; ?>" class="card-img-top">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="modal-footer border-top-0">
-                                                                    <button type="button" class="btn btn-sm btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-sm btn-sm btn-danger">Delete</button>
+                                                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -313,34 +385,6 @@
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
-
-                                    <!-- Edit Modal -->
-                                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content bg-dark">
-                                                <div class="modal-header border-bottom-0">
-                                                    <h1 class="modal-title fs-5" id="editModal">Edit Room</h1>
-                                                    <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="RoomName">Name Room</label>
-                                                            <input type="text" class="form-control" id="RoomName" placeholder="Enter name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="totalRoom">Total Room</label>
-                                                            <input type="number" class="form-control" id="totalRoom" placeholder="Enter total">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer border-top-0">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -385,10 +429,10 @@
     const getLastUrl = url.split("/")[4]
     const alert = getLastUrl[0].toUpperCase() + getLastUrl.slice(1)
 
-    if (alert === 'Failed') {
+    if (alert === 'Ext') {
         Swal.fire({
             title: "Error",
-            text: "Input Fields Cannot be empty!",
+            text: "Format Image Must be jpg, png, jpeg!",
             icon: "error",
         }).then((result) => {
             if (result.isConfirmed) {
@@ -396,6 +440,19 @@
             }
         })
     }
+
+    if (alert === 'Size') {
+        Swal.fire({
+            title: "Error",
+            text: "Image Size Must be Less Than 2MB!",
+            icon: "error",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
 
     if (alert === 'Error') {
         Swal.fire({
@@ -424,6 +481,6 @@
     }
 
     function redirect() {
-        window.location.href = "<?= BASE_URL ?>/admin/details_room"
+        window.location.href = "<?= BASE_URL ?>/admin/rooms"
     }
 </script>

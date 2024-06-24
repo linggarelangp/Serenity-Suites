@@ -129,14 +129,14 @@
                     </li>
                     <li class="nav-item">
                         <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="false">
-                            <i class="fas fa-roomsconfiguration"></i>
+                            <i class="fas fa-door-open"></i>
                             <p>Rooms Configuration</p>
                             <span class="caret"></span>
                         </a>
                         <div class="collapse" id="roomsconfiguration">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
-                                    <a href="<?= BASE_URL; ?>/admin/room">
+                                    <a href="<?= BASE_URL; ?>/admin/rooms">
                                         <span class=" sub-item">Room</span>
                                     </a>
                                 </li>
