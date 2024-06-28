@@ -36,8 +36,8 @@
                                     <div class="user-box">
                                         <div class="avatar-lg"><img src="<?= BASE_URL ?>/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4>Admin</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            <h4><?= $_SESSION['fullname']; ?></h4>
+                                            <p class="text-muted"><?= $_SESSION['email']; ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                         </div>
                                     </div>
                                 </li>
@@ -71,8 +71,8 @@
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                             <span>
-                                Admin
-                                <span class="user-level">Administrator</span>
+                                <?= $_SESSION['fullname']; ?>
+                                <span class="user-level"><?= $_SESSION['roleid'] === 1 ? "Admin" : "Staff"; ?></span>
                                 <span class="caret"></span>
                             </span>
                         </a>

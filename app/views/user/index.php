@@ -36,8 +36,8 @@
                                     <div class="user-box">
                                         <div class="avatar-lg"><img src="<?= BASE_URL ?>/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4><?= $_SESSION['fullname']; ?></h4>
-                                            <p class="text-muted"><?= $_SESSION['email']; ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            <h4><?php echo ($_SESSION['fullname']); ?></h4>
+                                            <p class="text-muted"><?php echo $_SESSION['email'] ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                         </div>
                                     </div>
                                 </li>
@@ -45,11 +45,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">My Profile</a>
                                     <a class="dropdown-item" href="#">My Balance</a>
-                                    <a class="dropdown-item" href="#">Inbox</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Account Setting</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Logout</a>
+                                    <a class="dropdown-item" href="<?= BASE_URL ?>/auth/logout">Logout</a>
                                 </li>
                             </div>
                         </ul>
@@ -71,8 +67,8 @@
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                             <span>
-                                <?= $_SESSION['fullname']; ?>
-                                <span class="user-level">Administrator</span>
+                                <?php echo ($_SESSION['fullname']); ?>
+                                <span class="user-level">User</span>
                                 <span class="caret"></span>
                             </span>
                         </a>
@@ -100,69 +96,10 @@
                     </div>
                 </div>
                 <ul class="nav nav-primary">
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/index">
+                    <li class="nav-item active">
+                        <a href="<?= BASE_URL; ?>/User/index">
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="nav-item active submenu">
-                        <a data-toggle="collapse" href="#user" class="collapsed" aria-expanded="true">
-                            <i class="fas fa-user"></i>
-                            <p>User</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse show" id="user">
-                            <ul class="nav nav-collapse pb-0 mb-0">
-                                <li class="active">
-                                    <a href="<?= BASE_URL; ?>/admin/customers">
-                                        <span class=" sub-item">Customers</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= BASE_URL; ?>/admin/worker">
-                                        <span class="sub-item">Worker</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="false">
-                            <i class="fas fa-door-open"></i>
-                            <p>Rooms Configuration</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="roomsconfiguration">
-                            <ul class="nav nav-collapse pb-0 mb-0">
-                                <li>
-                                    <a href="<?= BASE_URL; ?>/admin/rooms">
-                                        <span class=" sub-item">Room</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= BASE_URL; ?>/admin/details_room">
-                                        <span class=" sub-item">Details Room</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= BASE_URL; ?>/admin/room_facilities">
-                                        <span class=" sub-item">Room Facilities</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/facilities_hotel">
-                            <i class="fas fa-database"></i>
-                            <p>Facilities Hotel</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL; ?>/admin/reservasi">
-                            <i class="fas fa-database"></i>
-                            <p>Reservasi</p>
                         </a>
                     </li>
                 </ul>
@@ -174,8 +111,9 @@
     <div class="main-panel">
         <div class="content">
             <div class="page-inner">
+
                 <div class="page-header">
-                    <h4 class="page-title">Admin</h4>
+                    <h4 class="page-title">User</h4>
                     <ul class="breadcrumbs">
                         <li class="nav-item">
                             <a href="#">Pages</a>
@@ -184,60 +122,52 @@
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Admin</a>
+                            <a href="#">User</a>
                         </li>
                         <li class="separator">
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Customers</a>
+                            <a href="#">Dashboard</a>
                         </li>
                     </ul>
+                </div>
+
+                <div class="mt-2 mb-4">
+                    <h2 class="text-white pb-2">Welcome back, <?php echo ($_SESSION['firstname']); ?></h2>
+                    <h5 class="text-white op-7 mb-4">Yesterday I was clever, so I wanted to change the world. Today
+                        I am wise, so I am changing myself.</h5>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title">Table User</h4>
+                            <div class="card-header">
+                                <h4 class="card-title">My Bookings</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>Role</th>
-                                                <th>Email</th>
-                                                <th>Full Name</th>
-                                                <th>Created At</th>
-                                                <th>Updated At</th>
+                                                <th>Room Preview</th>
+                                                <th>Room Type</th>
+                                                <th>Guest</th>
+                                                <th>Check In</th>
+                                                <th>Check Out</th>
                                             </tr>
                                         </thead>
-
-                                        <tfoot>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Role</th>
-                                                <th>Email</th>
-                                                <th>Full Name</th>
-                                                <th>Created At</th>
-                                                <th>Updated At</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
-                                            <?php
+                                            <!-- <?php
                                             $no = 1;
-                                            foreach ($data['customers'] as $data) : ?>
+                                            foreach ($data['roles'] as $data) : ?>
                                                 <tr>
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data->roleName; ?></td>
-                                                    <td><?= $data->email; ?></td>
-                                                    <td><?= $data->fullname ?? 'NULL'; ?></td>
+                                                    <td><?= $data->name; ?></td>
                                                     <td><?= $data->createdAt; ?></td>
                                                     <td><?= $data->updatedAt; ?></td>
                                                 </tr>
-                                            <?php endforeach; ?>
+                                            <?php endforeach; ?> -->
                                         </tbody>
                                     </table>
                                 </div>

@@ -56,47 +56,47 @@
     <div class="container-fluid bg-dark py-5">
         <div class="w-100 container text-center">
             <h1 class="mb-5 text-white fw-semibold">OUR FACILITIES</h1>
-
-            <div class="container d-flex justify-content-center flex-wrap m-0 p-0">
-                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 18rem;">
-                    <img src="<?= BASE_URL; ?>/assets/img/bar.jpg" class="card-img-top rounded-2">
+            <div class="text-dark container d-flex justify-content-center flex-wrap m-0 p-0">
+                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 16rem;">
+                    <img src="<?= BASE_URL ?>/assets/img/bar.jpg" class="w-auto h-100 rounded-3">
                     <div class="card-body">
-                        <p class="card-text fs-4 fw-medium">BAR
+                        <p class="text-white card-text fs-4 fw-light">BAR
                         </p>
                     </div>
                 </div>
 
-                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 18rem;">
-                    <img src="<?= BASE_URL; ?>/assets/img/sauna.jpg" class="card-img-top rounded-2">
+                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 16rem;">
+                    <img src="<?= BASE_URL ?>/assets/img/sauna.jpg" class="w-auto h-100 card-img-top rounded-3">
                     <div class="card-body">
-                        <p class="card-text fs-4 fw-medium">SAUNA
+                        <p class="text-white card-text fs-4 fw-light">SAUNA
                         </p>
                     </div>
                 </div>
 
-                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 18rem;">
-                    <img src="<?= BASE_URL; ?>/assets/img/restaurant.jpg" class="card-img-top rounded-2">
+                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 16rem;">
+                    <img src="<?= BASE_URL ?>/assets/img/restaurant.jpg" class="w-auto h-100 card-img-top rounded-3">
                     <div class="card-body">
-                        <p class="card-text fs-4 fw-medium">RESTAURANT
+                        <p class="text-white card-text fs-4 fw-light">RESTAURANT
                         </p>
                     </div>
                 </div>
 
-                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 18rem;">
-                    <img src="<?= BASE_URL; ?>/assets/img/gym.jpg" class="card-img-top rounded-2">
+                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 16rem;">
+                    <img src="<?= BASE_URL ?>/assets/img/gym.jpg" class="w-auto h-100 card-img-top rounded-3">
                     <div class="card-body">
-                        <p class="card-text fs-4 fw-medium">GYM
+                        <p class="text-white card-text fs-4 fw-light">GYM
                         </p>
                     </div>
                 </div>
 
-                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 18rem;">
-                    <img src="<?= BASE_URL; ?>/assets/img/swimmingPool.jpg" class="card-img-top rounded-2 object-fit-cover " style="height: 230px;">
+                <div class="card m-3 bg-dark text-white shadow-none border-0" style="width: 16rem;">
+                    <img src="<?= BASE_URL ?>/assets/img/swimmingPool.jpg" class="w-auto h-100 card-img-top rounded-3">
                     <div class="card-body">
-                        <p class="card-text fs-4 fw-medium">SWIMMING POOL
+                        <p class="text-white card-text fs-4 fw-light">SWIMMING POOL
                         </p>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

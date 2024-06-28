@@ -36,8 +36,18 @@
                 </div>
             </div>
             <div class="collapse navbar-collapse justify-content-end flex-grow-0" id="navbarNavAltMarkup">
+            <?php session_start();
+            if ($_SESSION['is_logged_in']): ?>
+                <a href="<?= BASE_URL ?>/auth/islogin">
+                <div>
+                    <img src="<?= BASE_URL; ?>/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" style="width: 2.5rem;
+  height: 2.5rem;">
+                </div>
+                </a>
+            <?php else: ?>
                 <a href="<?= BASE_URL; ?>/auth/login" id="btn1" type="button" class="btn btn-outline-primary me-2 rounded-0">Sign In</a>
                 <a href="<?= BASE_URL; ?>/auth/register" id="btn2" type="button" class="btn btn-primary rounded-0">Sign Up</a>
+            <?php endif; ?>
             </div>
         </div>
         </div>
