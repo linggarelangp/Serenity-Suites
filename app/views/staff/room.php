@@ -255,13 +255,18 @@
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            foreach ($data['room'] as $data) : ?>
+                                            foreach ($data['rooms'] as $room) : ?>
                                                 <tr>
                                                     <td><?= $no++; ?></td>
-                                                    <td><?= $data->nama; ?></td>
-                                                    <td><?= $data->totalroom ?? 'NULL'; ?></td>
-                                                    <td><?= $data->createdAt; ?></td>
-                                                    <td><?= $data->updatedAt; ?></td>
+                                                    <td><?= $room->name; ?></td>
+                                                    <td class="w-full h-auto d-flex justify-content-center my-2">
+                                                        <div class="card m-0 p-0" style="width: 10rem;">
+                                                            <img src="<?= BASE_URL . "/" . $room->path_image; ?>" class="card-img-top">
+                                                        </div>
+                                                    </td>
+                                                    <td><?= number_format($room->price); ?></td>
+                                                    <td><?= $room->createdAt; ?></td>
+                                                    <td><?= $room->updatedAt; ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
