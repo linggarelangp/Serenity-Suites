@@ -36,8 +36,8 @@
                                     <div class="user-box">
                                         <div class="avatar-lg"><img src="<?= BASE_URL ?>/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4>Admin</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            <h4><?= $_SESSION['fullname']; ?></h4>
+                                            <p class="text-muted"><?= $_SESSION['email']; ?></p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                         </div>
                                     </div>
                                 </li>
@@ -71,7 +71,7 @@
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                             <span>
-                                Admin
+                                <?php echo ($_SESSION['fullname']); ?>
                                 <span class="user-level">Administrator</span>
                                 <span class="caret"></span>
                             </span>
@@ -197,7 +197,7 @@
                 </div>
 
                 <div class="mt-2 mb-4">
-                    <h2 class="text-white pb-2">Welcome back, Admin!</h2>
+                    <h2 class="text-white pb-2">Welcome back, <?= $_SESSION['firstname']; ?>!</h2>
                     <h5 class="text-white op-7 mb-4">Yesterday I was clever, so I wanted to change the world. Today
                         I am wise, so I am changing myself.</h5>
                 </div>

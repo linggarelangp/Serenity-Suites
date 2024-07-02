@@ -42,7 +42,8 @@ class Auth extends Controller
                 $_SESSION['lastname'] = $data->lastname;
                 $_SESSION['fullname'] = $data->fullname;
                 $_SESSION['status'] = true;
-
+                $_SESSION['is_logged_in'] = true;
+                
                 if ($data->roleid === 1) {
                     header("location: " . BASE_URL . "/admin");
                 } else if ($data->roleid === 2) {
@@ -58,6 +59,7 @@ class Auth extends Controller
 
     public function registerValidation()
     {
+        session_start();
         $email = preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $_POST['email']) ? true : false;
 
         if (!$email) {
@@ -67,6 +69,7 @@ class Auth extends Controller
         } else {
             if ($this->model($this->auth_model)->register($_POST) > 0) {
                 header("location: " . BASE_URL . "/auth/register/success");
+                $_SESSION['is_logged_in'] = true;
             } else {
                 header("location: " . BASE_URL . "/auth/register/failed");
             }
@@ -76,8 +79,23 @@ class Auth extends Controller
     public function logout()
     {
         session_start();
+        $_SESSION['is_logged_in'] = false;
         session_destroy();
 
         header("location: " . BASE_URL . "/home");
+    }
+
+    public function islogin()
+    {
+        session_start();
+        if ($_SESSION['roleid'] === 1) {
+            header("location: " . BASE_URL . "/admin");
+        } else if ($_SESSION['roleid'] === 2) {
+            header("location: " . BASE_URL . "/staff");
+        } else if ($_SESSION['roleid'] === 3) {
+            header("location: " . BASE_URL . "/user");
+        } else {
+            header("location: " . BASE_URL . "/home");
+        }
     }
 }
