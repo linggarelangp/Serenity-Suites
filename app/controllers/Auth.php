@@ -43,7 +43,7 @@ class Auth extends Controller
                 $_SESSION['fullname'] = $data->fullname;
                 $_SESSION['status'] = true;
                 $_SESSION['is_logged_in'] = true;
-                
+
                 if ($data->roleid === 1) {
                     header("location: " . BASE_URL . "/admin");
                 } else if ($data->roleid === 2) {

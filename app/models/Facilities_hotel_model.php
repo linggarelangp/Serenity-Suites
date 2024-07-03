@@ -1,6 +1,6 @@
 <?php
 
-class Hotel_facilities_model
+class Facilities_hotel_model
 {
     private $table = 'hotelfacilities';
     private $db;
@@ -10,13 +10,13 @@ class Hotel_facilities_model
         $this->db = new Database;
     }
 
-    public function getAllHotelFacilities(): array
+    public function getAllFacilitiesHotel(): array
     {
         $this->db->query('SELECT * FROM ' . $this->table);
         return $this->db->resultSet();
     }
 
-    public function getHotelFacilitiesByName($name)
+    public function getFacilitiesHotelByName($name)
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' WHERE name LIKE :name');
         $this->db->bind(':name', '%' . $name . '%');
@@ -26,7 +26,7 @@ class Hotel_facilities_model
             return $result;
         }
 
-        return $this->getAllHotelFacilities();
+        return $this->getAllFacilitiesHotel();
     }
 
     public function getRoleByDate(DateTime $date)
@@ -39,13 +39,15 @@ class Hotel_facilities_model
             return $result;
         }
 
-        return $this->getAllHotelFacilities();
+        return $this->getAllFacilitiesHotel();
     }
 
     public function addHotelFacilites($data)
     {
-        $this->db->query('INSERT INTO ' . $this->table . '(name) VALUES(:name)');
+        $dateNow = date_create('now')->format('Y-m-d');
+        $this->db->query('INSERT INTO ' . $this->table . "(name, path_image,  createdAt, updatedAt) VALUES(:name, :path_image, '$dateNow', '$dateNow')");
         $this->db->bind(':name', $data['name']);
+        $this->db->bind(':path_image', $data['path_image']);
 
         $this->db->execute();
 
@@ -54,8 +56,11 @@ class Hotel_facilities_model
 
     public function updateHotelFacilites($id, $data)
     {
-        $this->db->query('UPDATE ' . $this->table . ' SET name = :name');
+        $dateNow = date_create('now')->format('Y-m-d');
+        $this->db->query("UPDATE " . $this->table . " SET name = :name, path_image = :path, updatedAt = '$dateNow' WHERE id = :id");
+        $this->db->bind(':id', $id);
         $this->db->bind(':name', $data['name']);
+        $this->db->bind(':path', $data['image']);
 
         $this->db->execute();
 
@@ -64,7 +69,7 @@ class Hotel_facilities_model
 
     public function deleteHotelFacilites($id)
     {
-        $this->db->query('DELETE FROM ' . $this->table . 'WHERE id = :id');
+        $this->db->query("DELETE FROM " . $this->table . " WHERE id = :id");
         $this->db->bind(':id', $id);
 
         $this->db->execute();

@@ -127,16 +127,16 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item submenu">
-                        <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="true">
-                            <i class="fas fa-roomsconfiguration"></i>
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="false">
+                            <i class="fas fa-door-open"></i>
                             <p>Rooms Configuration</p>
                             <span class="caret"></span>
                         </a>
                         <div class="collapse" id="roomsconfiguration">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
-                                    <a href="<?= BASE_URL; ?>/admin/room">
+                                    <a href="<?= BASE_URL; ?>/admin/rooms">
                                         <span class="sub-item">Room</span>
                                     </a>
                                 </li>
@@ -199,38 +199,40 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title">Table Facilities Hotels</h4>
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#add_facilities_hotelModal">Add Facilities Hotel</button>
+                                <h4 class="card-title">Table Facilities Hotel</h4>
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addfacilities_hotelModal">Add Facilities Hotel</button>
                             </div>
 
                             <!-- Add Facilities Hotel Modal -->
-                            <div class="modal fade" id="add_facilities_hotelModal" tabindex="-1" aria-labelledby="add_facilities_hotelModal" aria-hidden="true">
+                            <div class="modal fade" id="addfacilities_hotelModal" tabindex="-1" aria-labelledby="addfacilities_hotelModal" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content bg-dark">
                                         <div class="modal-header border-bottom-0">
-                                            <h1 class="modal-title fs-5" id="add_facilities_hotelModal">Add Room Facilities</h1>
-                                            <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                            <h1 class="modal-title fs-5" id="addfacilities_hotelModal">Add Facilities Hotel</h1>
+                                            <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                         </div>
-                                        <div class="modal-body">
-                                            <form>
+                                        <form enctype="multipart/form-data" method="POST" action="<?= BASE_URL; ?>/facilities_hotel/addFacilitiesHotel">
+                                            <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="facilities_hotelName">Name Facilities Hotel</label>
-                                                    <input type="text" class="form-control" id="facilities_hotelName" placeholder="Enter name">
+                                                    <label>Facilities Name</label>
+                                                    <input type="text" class="form-control" placeholder="Enter name" name="name">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="CreateAt">Create At</label>
-                                                    <input type="date" class="form-control" id="CreateAt" placeholder="Enter Create At">
+
+                                                <div class="m-2">
+                                                    <label class="form-label">Facilities Hotel Image</label>
+                                                    <input class="form-control form-control-sm mt-2" type="file" id="formFile" name="facilities_hotel_image">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="UpdateAt">Update At</label>
-                                                    <input type="date" class="form-control" id="UpdateAt" placeholder="Enter Update At">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer border-top-0">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
+
+                                                <p style="font-size: 0.8rem; font-weight: 300; letter-spacing: .05rem;" class="mb-0 ml-3 text-white">Format must be jpg, png, jpeg</p>
+                                                <p style="font-size: 0.8rem; font-weight: 300; letter-spacing: .05rem;" class="ml-3 text-white">image size maximum 2MB</p>
+
+                                            </div>
+                                            <div class="modal-footer border-top-0">
+                                                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="reset" class="btn  btn-sm btn-info">Reset</button>
+                                                <button type="submit" class="btn btn-sm btn-primary">Add</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +242,9 @@
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
+                                                <th>No</th>
                                                 <th>Name</th>
+                                                <th>Image</th>
                                                 <th>Create At</th>
                                                 <th>Update At</th>
                                                 <th>Action</th>
@@ -248,91 +252,126 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name Facilities Hotel</th>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Image</th>
                                                 <th>Create At</th>
                                                 <th>Update At</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>Standard Facilities Hotel</td>
-                                                <td>2</td>
-                                                <td>2</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Superior Facilities Hotel</td>
-                                                <td>6</td>
-                                                <td>6</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Deluxe Facilities Hotel</td>
-                                                <td>5</td>
-                                                <td>5</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($data["facilities_hotel"] as $facilities_hotel) :
+                                            ?>
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $facilities_hotel->name; ?></td>
+                                                    <td class="w-full h-auto d-flex justify-content-center my-2">
+                                                        <div class="card m-0 p-0" style="width: 10rem;">
+                                                            <img src="<?= BASE_URL . "/" . $facilities_hotel->path_image; ?>" class="card-img-top">
+                                                        </div>
+                                                    </td>
+                                                    <td><?= $facilities_hotel->createdAt; ?></td>
+                                                    <td><?= $facilities_hotel->updatedAt; ?></td>
+                                                    <td>
+                                                        <button type="button" class="w-100 btn btn-sm btn-warning mb-2" data-bs-toggle="modal" data-bs-target="#updateHotelFacilitesModal<?= $facilities_hotel->id; ?>">Update</button>
+                                                        <button type="button" class="w-100 btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFacilitiesHotelModal<?= $facilities_hotel->id; ?>">Delete</button>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Update Modal -->
+                                                <div class="modal fade" id="updateHotelFacilitesModal<?= $facilities_hotel->id; ?>" tabindex="-1" aria-labelledby="updateHotelFacilitesModal" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-dark">
+                                                            <div class="modal-header border-bottom-0">
+                                                                <h1 class="modal-title fs-5" id="updateHotelFacilitesModal">Update Facilities Hotel</h1>
+                                                                <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                            </div>
+                                                            <form enctype="multipart/form-data" method="POST" action="<?= BASE_URL; ?>/facilities_hotel/updateHotelFacilites">
+                                                                <div class="modal-body">
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" id="facilities_hotelName" placeholder="Enter name" value="<?= $facilities_hotel->id; ?>" name="facilities_hotel_id">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Name Facilities Hotel</label>
+                                                                        <input type="text" class="form-control" placeholder="Enter name" name="update_facilities_hotel_name" value="<?= $facilities_hotel->name; ?>">
+                                                                    </div>
+
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" name="current_image_facilities_hotel" value="<?= $facilities_hotel->path_image; ?>">
+                                                                    </div>
+
+                                                                    <div class="m-2">
+                                                                        <label class="form-label">
+                                                                            Facilities Hotel Image
+                                                                            <span class="font-italic">
+                                                                                (image can be null if you just change facilities hotel name)
+                                                                            </span>
+                                                                        </label>
+
+                                                                        <input class="form-control form-control-sm mt-2" type="file" id="formFile" name="facilities_hotel_image">
+                                                                    </div>
+
+                                                                    <p style="font-size: 0.8rem; font-weight: 300; letter-spacing: .05rem;" class="mb-0 ml-3 text-white">Format must be jpg, png, jpeg</p>
+                                                                    <p style="font-size: 0.8rem; font-weight: 300; letter-spacing: .05rem;" class="mb-0 ml-3 text-white">image size maximum 2MB</p>
+                                                                </div>
+                                                                <div class="modal-footer border-top-0">
+                                                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="reset" class="btn btn-sm btn-info">Reset</button>
+                                                                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Delete Modal -->
+                                                <div class="modal fade" id="deleteFacilitiesHotelModal<?= $facilities_hotel->id; ?>" tabindex="-1" aria-labelledby="deleteFacilitiesHotelModal" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-dark">
+                                                            <div class="modal-header border-bottom-0">
+                                                                <h1 class="modal-title fs-5">Delete Facilities Hotel</h1>
+                                                                <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                            </div>
+                                                            <form method="POST" action="<?= BASE_URL; ?>/facilities_hotel/deleteHotelFacilites">
+                                                                <div class="modal-body">
+                                                                    <p class="text-center">Are you sure you want to delete this Facilities Hotel?</p>
+
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" id="facilities_hotelName" placeholder="Enter name" value="<?= $facilities_hotel->id; ?>" name="facilities_hotel_id">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Name Facilities Hotel</label>
+                                                                        <input type="text" class="text-white form-control-plaintext border border-1 rounded-5 px-3" placeholder="Enter name" name="delete_facilities_hotel_name" value="<?= $facilities_hotel->name; ?>" readonly>
+                                                                    </div>
+
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" name="delete_facilities_hotel_image" value="<?= $facilities_hotel->path_image; ?>">
+                                                                    </div>
+
+                                                                    <p class="text-center">Image Preview</p>
+
+                                                                    <div class="w-100 d-flex justify-content-center">
+                                                                        <div class="card m-0 p-0" style="width: 14rem;">
+                                                                            <img src="<?= BASE_URL . "/" . $facilities_hotel->path_image; ?>" class="card-img-top">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer border-top-0">
+                                                                    <button type=" button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
-
-                                    <!-- Edit Modal -->
-                                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content bg-dark">
-                                                <div class="modal-header border-bottom-0">
-                                                    <h1 class="modal-title fs-5" id="editModal">Edit Facilities Hotel</h1>
-                                                    <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-group">
-                                                            <label for="room_facilitiesName">Name Facilities Hotel</label>
-                                                            <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="CreateAt">Create At</label>
-                                                            <input type="date" class="form-control" id="CreateAt" placeholder="Enter Create At">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="UpdateAt">Update At</label>
-                                                            <input type="date" class="form-control" id="UpdateAt" placeholder="Enter Update At">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer border-top-0"">
-                                                    <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Delete Modal -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content bg-dark">
-                                                <div class="modal-header border-bottom-0">
-                                                    <h1 class="modal-title fs-5" id="deleteModal">Delete Facilities Hotel</h1>
-                                                    <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Are you sure you want to delete this Room Facilities?</p>
-                                                    <button type="button" class="btn btn-danger">Delete</button>
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -369,3 +408,66 @@
         </footer>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const url = "<?= $_SERVER['REQUEST_URI']; ?>"
+
+    const getLastUrl = url.split("/")[4]
+    const alert = getLastUrl[0].toUpperCase() + getLastUrl.slice(1)
+
+    if (alert === 'Ext') {
+        Swal.fire({
+            title: "Error",
+            text: "Format Image Must be jpg, png, jpeg!",
+            icon: "error",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+    if (alert === 'Size') {
+        Swal.fire({
+            title: "Error",
+            text: "Image Size Must be Less Than 2MB!",
+            icon: "error",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+
+    if (alert === 'Error') {
+        Swal.fire({
+            title: "Opss...",
+            text: `Error While Uploading Data!`,
+            icon: "error",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+    const method = ["Added", "Updated", "Deleted"]
+
+    if (method.includes(alert)) {
+        Swal.fire({
+            title: "Success",
+            text: `Data Has Been ${alert}!`,
+            icon: "success",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+    function redirect() {
+        window.location.href = "<?= BASE_URL ?>/admin/facilities_hotel"
+    }
+</script>

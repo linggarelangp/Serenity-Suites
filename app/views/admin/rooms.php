@@ -154,6 +154,12 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a href="<?= BASE_URL; ?>/admin/facilities_hotel">
+                            <i class="fas fa-database"></i>
+                            <p>Facilities Hotel</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/admin/reservasi">
                             <i class="fas fa-database"></i>
                             <p>Reservasi</p>
@@ -205,7 +211,7 @@
                                             <h1 class="modal-title fs-5" id="addRoomModal">Add Room</h1>
                                             <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                         </div>
-                                        <form method="POST" action="<?= BASE_URL; ?>/rooms/addrooms" enctype="multipart/form-data">
+                                        <form enctype="multipart/form-data" method="POST" action="<?= BASE_URL; ?>/rooms/addrooms">
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>Name Room</label>
@@ -291,7 +297,7 @@
                                                                 <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                                             </div>
 
-                                                            <form method="POST" action="<?= BASE_URL; ?>/rooms/updateRooms" enctype="multipart/form-data">
+                                                            <form enctype="multipart/form-data" method="POST" action="<?= BASE_URL; ?>/rooms/updateRooms">
                                                                 <div class="modal-body">
                                                                     <div class="d-none form-group">
                                                                         <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name" value="<?= $room->id; ?>" name="room_id">

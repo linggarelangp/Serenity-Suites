@@ -40,7 +40,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <!-- <li>
+                                <li>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">My Profile</a>
                                     <a class="dropdown-item" href="#">My Balance</a>
@@ -49,7 +49,7 @@
                                     <a class="dropdown-item" href="#">Account Setting</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Logout</a>
-                                </li> -->
+                                </li>
                             </div>
                         </ul>
                     </li>

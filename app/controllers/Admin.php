@@ -7,6 +7,7 @@ class Admin extends Controller
     private string $users_model = 'users_model';
     private string $rooms_model = 'rooms_model';
     private string $room_facilities_model = 'rooms_facilities_model';
+    private string $facilities_hotel_model = 'facilities_hotel_model';
     private string $details_room_model = 'details_room_model';
 
     public function index(): void
@@ -81,7 +82,7 @@ class Admin extends Controller
     {
         $data = array(
             'title' => 'Facilities Hotel',
-            //'room_facilities' => $this->model($this->users_model)->getRoomFacilities()
+            'facilities_hotel' => $this->model($this->facilities_hotel_model)->getAllFacilitiesHotel()
         );
 
         $this->view_admin('admin/facilities_hotel', $data);
