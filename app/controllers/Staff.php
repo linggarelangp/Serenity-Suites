@@ -4,7 +4,10 @@ session_start();
 class Staff extends Controller
 {
     private string $roles_model = 'roles_model';
+    private string $rooms_model = 'rooms_model';
     private string $users_model = 'users_model';
+    private string $details_room_model = 'details_room_model';
+    private string $room_facilities_model = 'rooms_facilities_model';
 
     public function index(): void
     {
@@ -45,7 +48,7 @@ class Staff extends Controller
     {
         $data = array(
             'title' => 'Rooms',
-            // 'room' => $this->model($this->users_model)->getRoom()
+            'rooms' => $this->model($this->rooms_model)->getAllRooms()
         );
 
         $this->view_staff('staff/room', $data);
@@ -55,11 +58,14 @@ class Staff extends Controller
     {
         $data = array(
             'title' => 'details_room',
-            //'details_room' => $this->model($this->users_model)->getDetailsRoom()
+            'details_room' => $this->model($this->details_room_model)->getAllDetailsRoom(),
+            'rooms' => $this->model($this->rooms_model)->getAllRooms(),
+            'room_facilities' => $this->model($this->room_facilities_model)->getAllRoomFacilities()
         );
 
         $this->view_staff('staff/details_room', $data);
     }
+
     public function room_facilities(): void
     {
         $data = array(

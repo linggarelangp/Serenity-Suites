@@ -115,7 +115,7 @@
                         <div class="collapse" id="user">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
-                                    <a href="<?= BASE_URL; ?>/staff/customers"">
+                                    <a href="<?= BASE_URL; ?>/staff/customers">
                                         <span class=" sub-item">Customers</span>
                                     </a>
                                 </li>
@@ -129,14 +129,14 @@
                     </li>
                     <li class="nav-item active submenu">
                         <a data-toggle="collapse" href="#detailsroom" class="collapsed" aria-expanded="true">
-                            <i class="fas fa-detailsroom"></i>
+                            <i class="fas fa-door-open"></i>
                             <p>Rooms Configuration</p>
                             <span class="caret"></span>
                         </a>
                         <div class="collapse show" id="detailsroom">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
-                                    <a href="<?= BASE_URL; ?>/staff/room">
+                                    <a href="<?= BASE_URL; ?>/staff/rooms">
                                         <span class="sub-item">Room</span>
                                     </a>
                                 </li>
@@ -152,6 +152,12 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL; ?>/staff/facilities_hotel">
+                            <i class="fas fa-database"></i>
+                            <p>Facilities Hotel</p>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/staff/reservasi">
@@ -193,7 +199,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title">Table Details Room</h4>
+                                <h4 class="card-title">Table Detail Rooms</h4>
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">Add Room</button>
                             </div>
 
@@ -202,25 +208,35 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content bg-dark">
                                         <div class="modal-header border-bottom-0">
-                                            <h1 class="modal-title fs-5" id="addRoomModal">Add Room</h1>
-                                            <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                            <h1 class="modal-title fs-5" id="addRoomModal">Add Detail Room</h1>
+                                            <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                         </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="RoomName">Name Room</label>
-                                                    <input type="text" class="form-control" id="RoomName" name="RoomName" placeholder="Enter name">
+                                        <form method="POST" action="<?= BASE_URL ?>/details_room/addDetailsRoom">
+                                            <div class="modal-body">
+                                                <label class="mb-2 px-2">Select Room Name</label>
+                                                <div class="input-group mb-3 px-2">
+                                                    <select class="custom-select" name="room_id">
+                                                        <?php foreach ($data["rooms"] as $room) : ?>
+                                                            <option value="<?= $room->id; ?>">[Room ID: <?= $room->id; ?>] &nbsp; <?= $room->name; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="totalRoom">Total Room</label>
-                                                    <input type="number" class="form-control" id="totalRoom" name="totalRoom" placeholder="Enter total">
+
+                                                <label class="mb-2 px-2">Select Room Facility</label>
+                                                <div class="input-group mb-3 px-2">
+                                                    <select class="custom-select" name="facility_id">
+                                                        <?php foreach ($data["room_facilities"] as $facilities) : ?>
+                                                            <option value="<?= $facilities->id; ?>">[Facility ID: <?= $facilities->id; ?>] &nbsp; <?= $facilities->name; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer border-top-0">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
+                                            </div>
+
+                                            <div class="modal-footer border-top-0">
+                                                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-sm btn-primary">Add</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -230,31 +246,95 @@
                                     <table id="basic-datatables" class="display table table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Name Room</th>
-                                                <th>Total Room</th>
+                                                <th>No</th>
+                                                <th>Room</th>
+                                                <th>Name Facilities Room</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name Room</th>
-                                                <th>Total Room</th>
+                                                <th>No</th>
+                                                <th>Room</th>
+                                                <th>Name Facilities Room</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>Standard Room</td>
-                                                <td>2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Superior Room</td>
-                                                <td>6</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Deluxe Room</td>
-                                                <td>5</td>
-                                            </tr>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($data["details_room"] as $detail) :
+                                            ?>
+                                                <tr>
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $detail->name; ?></td>
+                                                    <td><?= $detail->room_facilities_name; ?></td>
+                                                </tr>
+
+                                                <!-- Delete Modal -->
+                                                <div class="modal fade" id="deleteModal<?= $detail->id; ?>" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-dark">
+                                                            <div class="modal-header border-bottom-0">
+                                                                <h1 class="modal-title fs-5" id="deleteModal">Delete Details Room</h1>
+                                                                <button type="button" class="border-0 bg-transparent text-white" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                            </div>
+                                                            <form method="POST" action="<?= BASE_URL; ?>/details_room/deleteDetailsRoom">
+                                                                <div class="modal-body">
+                                                                    <p class="text-center">Are you sure you want to delete this Details Room?</p>
+
+                                                                    <div class="d-none form-group">
+                                                                        <input type="text" class="form-control" value="<?= $detail->detail_id; ?>" name="details_room_id">
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Room</label>
+                                                                        <input type="text" class="text-white form-control-plaintext border border-1 rounded-5 px-3" value="<?= $detail->name; ?>" readonly>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label>Name Facility Room</label>
+                                                                        <input type="text" class="text-white form-control-plaintext border border-1 rounded-5 px-3" value="<?= $detail->room_facilities_name; ?>" readonly>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="modal-footer border-top-0">
+                                                                    <button type="button" class="btn btn-sm btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-sm btn-sm btn-danger">Delete</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
+
+                                    <!-- Edit Modal -->
+                                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-header border-bottom-0">
+                                                    <h1 class="modal-title fs-5" id="editModal">Edit Room</h1>
+                                                    <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="RoomName">Name Room</label>
+                                                            <input type="text" class="form-control" id="RoomName" placeholder="Enter name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="totalRoom">Total Room</label>
+                                                            <input type="number" class="form-control" id="totalRoom" placeholder="Enter total">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer border-top-0">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -291,3 +371,53 @@
         </footer>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const url = "<?= $_SERVER['REQUEST_URI']; ?>"
+
+    const getLastUrl = url.split("/")[4]
+    const alert = getLastUrl[0].toUpperCase() + getLastUrl.slice(1)
+
+    if (alert === 'Failed') {
+        Swal.fire({
+            title: "Error",
+            text: "Input Fields Cannot be empty!",
+            icon: "error",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+    if (alert === 'Error') {
+        Swal.fire({
+            title: "Opss...",
+            text: `Error While Uploading Data!`,
+            icon: "error",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+    const method = ["Added", "Updated", "Deleted"]
+
+    if (method.includes(alert)) {
+        Swal.fire({
+            title: "Success",
+            text: `Data Has Been ${alert}!`,
+            icon: "success",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                redirect()
+            }
+        })
+    }
+
+    function redirect() {
+        window.location.href = "<?= BASE_URL ?>/staff/details_room"
+    }
+</script>
