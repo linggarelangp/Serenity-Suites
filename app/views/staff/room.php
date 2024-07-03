@@ -154,6 +154,12 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a href="<?= BASE_URL; ?>/staff/facilities_hotel">
+                            <i class="fas fa-database"></i>
+                            <p>Facilities Hotel</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?= BASE_URL; ?>/staff/reservasi">
                             <i class="fas fa-database"></i>
                             <p>Reservasi</p>
@@ -194,7 +200,6 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title">Table Room</h4>
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">Add Room</button>
                             </div>
 
                             <!-- Add Room Modal -->

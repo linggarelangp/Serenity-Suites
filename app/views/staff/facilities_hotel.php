@@ -71,7 +71,7 @@
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                             <span>
-                                Staff
+                                <?= $_SESSION['fullname']; ?>
                                 <span class="user-level">Staff</span>
                                 <span class="caret"></span>
                             </span>
@@ -127,13 +127,13 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item active submenu">
+                    <li class="nav-item submenu">
                         <a data-toggle="collapse" href="#roomsconfiguration" class="collapsed" aria-expanded="true">
                             <i class="fas fa-roomsconfiguration"></i>
                             <p>Rooms Configuration</p>
                             <span class="caret"></span>
                         </a>
-                        <div class="collapse show" id="roomsconfiguration">
+                        <div class="collapse" id="roomsconfiguration">
                             <ul class="nav nav-collapse pb-0 mb-0">
                                 <li>
                                     <a href="<?= BASE_URL; ?>/staff/room">
@@ -145,7 +145,7 @@
                                         <span class="sub-item">Details Room</span>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li>
                                     <a href="<?= BASE_URL; ?>/staff/room_facilities">
                                         <span class="sub-item">Room Facilities</span>
                                     </a>
@@ -153,7 +153,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="<?= BASE_URL; ?>/staff/facilities_hotel">
                             <i class="fas fa-database"></i>
                             <p>Facilities Hotel</p>
@@ -190,7 +190,7 @@
                             <i class="flaticon-right-arrow"></i>
                         </li>
                         <li class="nav-item">
-                            <a href="#">Room facilities</a>
+                            <a href="#">Facilities Room</a>
                         </li>
                     </ul>
                 </div>
@@ -199,22 +199,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title">Table Room Facilities</h4>
+                                <h4 class="card-title">Table Facilities Hotels</h4>
                             </div>
 
-                            <!-- Add Room Facilities Modal -->
-                            <div class="modal fade" id="addroom_facilitiesModal" tabindex="-1" aria-labelledby="addroom_facilitiesModal" aria-hidden="true">
+                            <!-- Add Facilities Hotel Modal -->
+                            <div class="modal fade" id="add_facilities_hotelModal" tabindex="-1" aria-labelledby="add_facilities_hotelModal" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content bg-dark">
                                         <div class="modal-header border-bottom-0">
-                                            <h1 class="modal-title fs-5" id="addroom_facilitiesModal">Add Room Facilities</h1>
+                                            <h1 class="modal-title fs-5" id="add_facilities_hotelModal">Add Room Facilities</h1>
                                             <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
                                         </div>
                                         <div class="modal-body">
                                             <form>
                                                 <div class="form-group">
-                                                    <label for="room_facilitiesName">Name Room Facilities</label>
-                                                    <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name">
+                                                    <label for="facilities_hotelName">Name Facilities Hotel</label>
+                                                    <input type="text" class="form-control" id="facilities_hotelName" placeholder="Enter name">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="CreateAt">Create At</label>
@@ -246,29 +246,84 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Name Room Facilities</th>
+                                                <th>Name Facilities Hotel</th>
                                                 <th>Create At</th>
                                                 <th>Update At</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <tr>
-                                                <td>Standard Room Facilities</td>
+                                                <td>Standard Facilities Hotel</td>
                                                 <td>2</td>
                                                 <td>2</td>
+                                                <td>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>Superior Room Facilities</td>
+                                                <td>Superior Facilities Hotel</td>
                                                 <td>6</td>
                                                 <td>6</td>
+                                                <td>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>Deluxe Room Facilities</td>
+                                                <td>Deluxe Facilities Hotel</td>
                                                 <td>5</td>
                                                 <td>5</td>
+                                                <td>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
+
+                                    <!-- Edit Modal -->
+                                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-header border-bottom-0">
+                                                    <h1 class="modal-title fs-5" id="editModal">Edit Facilities Hotel</h1>
+                                                    <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="room_facilitiesName">Name Facilities Hotel</label>
+                                                            <input type="text" class="form-control" id="room_facilitiesName" placeholder="Enter name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="CreateAt">Create At</label>
+                                                            <input type="date" class="form-control" id="CreateAt" placeholder="Enter Create At">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="UpdateAt">Update At</label>
+                                                            <input type="date" class="form-control" id="UpdateAt" placeholder="Enter Update At">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer border-top-0"">
+                                                    <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-header border-bottom-0">
+                                                    <h1 class="modal-title fs-5" id="deleteModal">Delete Facilities Hotel</h1>
+                                                    <button type="button" class="border-0 bg-transparent" style="cursor: pointer;" data-bs-dismiss="modal" aria-label="Close">X</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this Room Facilities?</p>
+                                                    <button type="button" class="btn btn-danger">Delete</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

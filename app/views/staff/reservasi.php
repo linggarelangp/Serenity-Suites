@@ -153,6 +153,12 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL; ?>/staff/facilities_hotel">
+                            <i class="fas fa-database"></i>
+                            <p>Facilities Hotel</p>
+                        </a>
+                    </li>
                     <li class="nav-item active">
                         <a href="<?= BASE_URL; ?>/staff/reservasi">
                             <i class="fas fa-database"></i>

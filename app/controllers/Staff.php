@@ -7,6 +7,7 @@ class Staff extends Controller
     private string $rooms_model = 'rooms_model';
     private string $users_model = 'users_model';
     private string $details_room_model = 'details_room_model';
+    private string $facilities_hotel_model = 'facilities_hotel_model';
     private string $room_facilities_model = 'rooms_facilities_model';
 
     public function index(): void
@@ -64,6 +65,15 @@ class Staff extends Controller
         );
 
         $this->view_staff('staff/details_room', $data);
+    }
+    public function facilities_hotel(): void
+    {
+        $data = array(
+            'title' => 'Facilities Hotel',
+            'facilities_hotel' => $this->model($this->facilities_hotel_model)->getAllFacilitiesHotel()
+        );
+
+        $this->view_staff('staff/facilities_hotel', $data);
     }
 
     public function room_facilities(): void
